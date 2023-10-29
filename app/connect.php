@@ -78,13 +78,13 @@ function create_tables() {
     $query = "create table if not exists company(
 
         id int primary key auto_increment,
-        logo varchar(1050) null,
-        name varchar(20) not null,
-        domain varchar(30) not null,
-        address varchar(60) not null,
+        logo varchar(600) null,
+        name varchar(30) not null,
+        domain varchar(60) not null,
+        address varchar(100) not null,
         email varchar(60) not null,
-        phone varchar(20) not null,
-        whatsapp_link varchar(60) null
+        phone varchar(30) not null,
+        whatsapp_link varchar(200) null
 
     )";
     $statement = $con->prepare($query);
@@ -100,6 +100,7 @@ function create_tables() {
         date_joined datetime default current_timestamp,
         is_staff tinyint default 0,
         is_superuser tinyint default 0, 
+        is_blocked tinyint default 0,
 
         key email (email),
         key username (username)

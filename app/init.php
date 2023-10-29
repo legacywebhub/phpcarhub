@@ -4,9 +4,6 @@
     All other files just have to include this file to have access to all functions and configurations
 */
 
-// START SESSION
-session_start();
-
 // DEFINING ABSOLUTE PATH TO IMPORT ALL REQUIRED FILES
 $abs_path = dirname(__FILE__);
 
@@ -17,7 +14,6 @@ require_once("$abs_path/functions.php");
 
 // FUNCTION INITIATION
 
-// Create tables
+// Create & drop tables if required
 create_tables();
-// Drop tables if required
 // drop_table('users');
