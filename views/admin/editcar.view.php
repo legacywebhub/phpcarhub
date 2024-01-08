@@ -40,6 +40,17 @@
                 </div>
             </div>
             <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category </label>
+                <div class="col-sm-12 col-md-7">
+                <select name="category" class="form-control selectric" required>
+                    <option value=<?=$context['car']['category_id']; ?>><?=fetch_post_category($context['car']['category_id']); ?></option>
+                    <?php foreach($context['categories'] as $category): ?>
+                        <option value=<?=$category['id']; ?>><?=$category['category']; ?></option>
+                    <?php endforeach ?>
+                </select>
+                </div>
+            </div>
+            <div class="form-group row mb-4">
                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
                 <div class="col-sm-12 col-md-7">
                 <input name="name" value="<?=$context['car']['name']; ?>" maxlength="60" type="text" class="form-control" required>
@@ -48,8 +59,8 @@
             <div class="form-group row mb-4">
                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Color</label>
                 <div class="col-sm-12 col-md-7">
-                <select name="color" class="form-control selectric" required>
-                    <option value="<?=$context['car']['color']; ?>">Select Color</option>
+                <select name="color" class="form-control selectric">
+                    <option value="<?=$context['car']['color']; ?>"><?=$context['car']['color'] || "Select Color"; ?></option>
                     <option value="Black">Black</option>
                     <option value="White">White</option>
                     <option value="Silver">Silver</option>

@@ -6,6 +6,7 @@ $admin = logged_in();
 // Other variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
 $title = ucfirst($company['name'])." | Add Car";
+$categories = query_fetch("SELECT * FROM car_categories");
 
 
 // Handling add car request
@@ -14,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION[
     // Car parameters for BB
     $data = [
         'car_id' => generate_unique_id(7),
+        'category_id' => sanitize_input($_POST['category']),
         'name' => sanitize_input($_POST['name']),
         'color' => sanitize_input($_POST['color']),
         'description' => $_POST['description'],
@@ -24,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION[
 
     try {
 
-        $query = "INSERT INTO CARS (car_id, name, color, description, price, available) VALUES (:car_id, :name, :color, :description, :price, :available)";
+        $query = "INSERT INTO CARS (car_id, category_id, name, color, description, price, available) VALUES (:car_id, :category_id, :name, :color, :description, :price, :available)";
         $query = query_db($query, $data);
         
         if (!empty($_FILES['images'])) {
@@ -66,7 +68,8 @@ $csrf_token = generate_csrf_token();
 $context = [
     'company'=> $company,
     'admin'=> $admin,
-    'title'=> $title
+    'title'=> $title,
+    'categories'=> $categories
 ];
 
 admin_view('addcar', $context);

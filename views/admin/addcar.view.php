@@ -30,6 +30,17 @@
                 </div>
                 </div>
             </div> -->
+            <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Category <span class="text-danger">*</span></label>
+                <div class="col-sm-12 col-md-7">
+                <select name="category" class="form-control selectric" required>
+                    <option value="">Select Car Category</option>
+                    <?php foreach($context['categories'] as $category): ?>
+                        <option value=<?=$category['id']; ?>><?=$category['category']; ?></option>
+                    <?php endforeach ?>
+                </select>
+                </div>
+            </div>
             <div class="image-container my-3 text-center"></div>
             <div class="form-group row mb-4">
                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Choose Images <span class="text-danger">*</span></label>
@@ -44,9 +55,9 @@
                 </div>
             </div>
             <div class="form-group row mb-4">
-                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Color <span class="text-danger">*</span></label>
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Color </label>
                 <div class="col-sm-12 col-md-7">
-                <select name="color" class="form-control selectric" required>
+                <select name="color" class="form-control selectric">
                     <option value="">Select Color</option>
                     <option value="Black">Black</option>
                     <option value="White">White</option>

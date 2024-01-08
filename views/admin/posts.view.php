@@ -14,12 +14,12 @@
     <div class="col-lg-12 col-md-12 col-12 col-sm-12">
         <div class="card">
             <div class="card-header">
-                <h4>Cars List  &nbsp;&nbsp;&nbsp;<a href="addcar" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i> Add Car</a></h4>
+                <h4>Posts  &nbsp;&nbsp;&nbsp;<a href="addpost" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i> Add Post</a></h4>
                 
                 <div class="card-header-form">
                     <form action="" method="get">
                       <div class="input-group">
-                        <input name="search" type="text" class="form-control" placeholder="Search car name">
+                        <input name="search" type="text" class="form-control" placeholder="Search Post">
                         <div class="input-group-btn">
                           <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                         </div>
@@ -40,52 +40,35 @@
                     <table class="table table-striped">
                     <tbody>
                     <tr>
+                        <th>ID</th>
+                        <th>Created</th>
+                        <th>Author</th>
                         <th>Category</th>
-                        <th>Images</th>
-                        <th>Car Name</th>
-                        <th>Price</th>
-                        <th>Available</th>
-                        <th>Date Uploaded</th>
-                        <th>Action</th>
+                        <th>Title</th>
+                        <th>Actions</th>
                     </tr>
-                    <?php if (empty($context['cars']['result'])): ?>
+                    <?php if (empty($context['posts']['result'])): ?>
                         <tr>
                             <td>
-                            No Results Found
+                            No Post
                             </td>
                         </tr>
                     <?php else: ?>
-                        <?php foreach($context['cars']['result'] as $car): ?>
+                        <?php foreach($context['posts']['result'] as $post): ?>
                         <tr class="mt-2" style="margin-top: 10px !important;">
-                            <td><?=fetch_car_category($car['category_id']); ?></td>
+                            <td><?=$post['id']; ?></td>
+                            <td><?=$post['created_at']; ?></td>
+                            <td><?=fetch_user($post['user_id']); ?></td>
+                            <td><?=fetch_post_category($post['category_id']); ?></td>
+                            <td><?=truncate_string($post['title'], 5); ?></td>
                             <td>
-                                <?php
-                                $car_id = $car['car_id'];
-                                $car_images = query_fetch("SELECT * FROM car_images WHERE car_id = '$car_id'");
-                                
-                                if (empty($car_images)) {
-                                    echo "No Image";
-                                } else {
-                                    foreach($car_images as $car_image) {
-                                        echo '<img  width="30" src="'.MEDIA_ROOT.'/cars/'.$car_image["image"].'">';
-                                    }
-                                }
-                                
-                                ?>
-                            </td>
-                            <td><?=$car['name']; ?></td>
-                            <td><?=$car['price']; ?></td>
-                            <td class="align-middle">
-                            <?php if($car['available'] == 1): ?>
-                            <div class="badge badge-success">Yes</div>
+                            <?php if($context['admin']['is_superuser'] == 1): ?>
+                                <a href="editpost?id=<?=$post['id']; ?>" class="btn btn-primary btn-action" data-toggle="tooltip" title="Edit" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="deletepost?id=<?=$post['id']; ?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-original-title="Delete"><i class="fas fa-trash"></i></a>
                             <?php else: ?>
-                            <div class="badge badge-danger">No</div>
+                                <a href="javascript:void(0);" class="btn btn-primary btn-action" data-toggle="tooltip" title="Edit" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="javascript:void(0);" class="btn btn-danger btn-action " data-toggle="tooltip" title="Delete" data-original-title="Delete"><i class="fas fa-trash"></i></a>
                             <?php endif ?>
-                            </td>
-                            <td><?=date("d-m-Y", strtotime($car['date_uploaded'])); ?></td>
-                            <td>
-                            <a href="editcar?id=<?=$car['id']; ?>" class="btn btn-primary btn-action" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                            <a href="deletecar?id=<?=$car['id']; ?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')" data-original-title="Delete"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                         <?php endforeach ?>
@@ -95,12 +78,12 @@
                 </div>
 
                 <div class="buttons">
-                <span style="margin: 0px 10px;">Showing Page <b><?=$context['cars']['page'] ?></b> 0f <b><?=$context['cars']['num_of_pages'] ?></b></span>
+                <span style="margin: 0px 10px;">Showing Page <b><?=$context['posts']['page'] ?></b> 0f <b><?=$context['posts']['num_of_pages'] ?></b></span>
                     <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                        <?php if ($context['cars']['has_previous']): ?>
+                        <?php if ($context['posts']['has_previous']): ?>
                         <li class="page-item">
-                            <a class="page-link" href="?page=<?=$context['cars']['previous_page'] ?>" aria-label="Previous">
+                            <a class="page-link" href="?page=<?=$context['posts']['previous_page'] ?>" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                             <span class="sr-only">Previous</span>
                             </a>
@@ -114,12 +97,12 @@
                         </li>
                         <?php endif ?>
 
-                        <li class="page-item active"><a class="page-link" href="javascript:void(0)"><?=$context['cars']['page'] ?></a></li>
+                        <li class="page-item active"><a class="page-link" href="javascript:void(0)"><?=$context['posts']['page'] ?></a></li>
 
 
-                        <?php if ($context['cars']['has_next']): ?>
+                        <?php if ($context['posts']['has_next']): ?>
                         <li class="page-item">
-                            <a class="page-link" href="?page=<?=$context['cars']['next_page'] ?>" aria-label="Next">
+                            <a class="page-link" href="?page=<?=$context['posts']['next_page'] ?>" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                             <span class="sr-only">Next</span>
                             </a>
@@ -134,7 +117,7 @@
                         <?php endif ?>
                     </ul>
                     </nav>
-                    <span style="margin: 0px 10px;"><b>Total (<?=$context['cars']['total'] ?>)</b></span>
+                    <span style="margin: 0px 10px;"><b>Total (<?=$context['posts']['total'] ?>)</b></span>
                 </div>
             </div>
         </div>

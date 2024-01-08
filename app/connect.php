@@ -125,6 +125,7 @@ function create_tables() {
 
         id int primary key auto_increment,
         car_id varchar(12) not null,
+        category_id int not null,
         name varchar(60) not null,
         color varchar(60) null,
         description text(2050) null,

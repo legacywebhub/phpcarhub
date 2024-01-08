@@ -24,6 +24,7 @@ if (!isset($_GET['id'])) {
 // Other variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
 $title = ucfirst($company['name'])." | Edit Car";
+$categories = query_fetch("SELECT * FROM car_categories");
 
 // Handling edit car request
 if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
@@ -38,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION[
     // Declaring DB variables in array
     $data = [
         'car_id' => $car_id,
+        'category_id' => sanitize_input($_POST['category']),
         'name' => sanitize_input($_POST['name']),
         'color' => sanitize_input($_POST['color']),
         'description' => $_POST['description'],
@@ -46,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION[
     ];
 
     try {
-        $query = "UPDATE cars SET name = :name, color = :color, description = :description, price = :price, available = :available WHERE car_id = :car_id LIMIT 1";
+        $query = "UPDATE cars SET category_id = :catgory_id, name = :name, color = :color, description = :description, price = :price, available = :available WHERE car_id = :car_id LIMIT 1";
         $query = query_db($query, $data);
 
         // Updating car images

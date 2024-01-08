@@ -435,6 +435,16 @@ function fetch_user(int $id) {
     return "No User";
 }
 
+// FUNCTION TO FETCH CAR CATEGORIES USING THEIR IDS
+function fetch_car_category(int $id) {
+    $matched_categories = query_fetch("SELECT * FROM car_categories WHERE id = $id LIMIT 1");
+
+    if (!empty($matched_categories)) {
+        return $matched_categories[0]['category'];
+    }
+    return "Invalid Category";
+}
+
 // FUNCTION TO FETCH POST CATEGORIES USING THEIR IDS
 function fetch_post_category(int $id) {
     $matched_categories = query_fetch("SELECT * FROM post_categories WHERE id = $id LIMIT 1");
@@ -576,4 +586,18 @@ function truncate_string($text, $limit) {
     } else {
         return $text;
     }
+}
+
+// FUNCTION TO CREATE SLUG FROM A TEXT
+function create_slug($text) {
+    // Replace spaces with hyphens
+    $slug = str_replace(' ', '-', $text);
+
+    // Remove special characters
+    $slug = preg_replace('/[^A-Za-z0-9\-]/', '', $slug);
+
+    // Convert to lowercase
+    $slug = strtolower($slug);
+
+    return $slug;
 }

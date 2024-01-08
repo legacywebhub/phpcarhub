@@ -103,6 +103,8 @@
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="command"></i><span>Cars</span></a>
               <ul class="dropdown-menu">
+              <li><a  href="<?=ROOT; ?>/admin/car-categories" class="nav-link">Categories</a></li>
+                <li><a  href="<?=ROOT; ?>/admin/addcarcategory" class="nav-link">Add Category</a></li>
                 <li><a  href="<?=ROOT; ?>/admin/cars" class="nav-link">Cars</a></li>
                 <li><a  href="<?=ROOT; ?>/admin/addcar" class="nav-link">Add Car</a></li>
                 <li><a  href="<?=ROOT; ?>/admin/car-images" class="nav-link">Car Images</a></li>
@@ -112,7 +114,7 @@
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="file-text"></i><span>Blog</span></a>
               <ul class="dropdown-menu">
                 <li><a  href="<?=ROOT; ?>/admin/post-categories" class="nav-link">Categories</a></li>
-                <li><a  href="<?=ROOT; ?>/admin/addcategory" class="nav-link">Add Category</a></li>
+                <li><a  href="<?=ROOT; ?>/admin/addpostcategory" class="nav-link">Add Category</a></li>
                 <li><a  href="<?=ROOT; ?>/admin/posts" class="nav-link">Posts</a></li>
                 <li><a  href="<?=ROOT; ?>/admin/addpost" class="nav-link">Add Post</a></li>
               </ul>
