@@ -1,7 +1,7 @@
 <?php
 
-// Authorizing user
-$user = logged_in();
+// Authenticating user
+$admin = logged_in();
 
 // Authorizing view
 if (!isset($_GET['id'])) {
@@ -24,7 +24,7 @@ $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
 $title = ucfirst($company['name'])." | Edit User";
 
 // Handling edit user request
-if ($_SERVER["REQUEST_METHOD"]  == "POST" && isset($_POST['edituser'])) {
+if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
 
     if (!empty($_POST['password1']) && !empty($_POST['password2'])) {
         if ($_POST['password1'] != $_POST['password2']) {
@@ -62,6 +62,12 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && isset($_POST['edituser'])) {
         $this_user_is_superuser = $this_user['is_superuser'];
     }
 
+    if (isset($_POST['is_blocked'])) {
+        $this_user_is_blocked = 1;
+    } else {
+        $this_user_is_blocked = $this_user['is_blocked'];
+    }
+
     // Declaring DB variables
     $data = [];
     $data['id'] = $this_user_id;
@@ -70,23 +76,24 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && isset($_POST['edituser'])) {
     $data['password'] = $this_user_password;
     $data['is_staff'] = $this_user_is_staff;
     $data['is_superuser'] = $this_user_is_superuser;
+    $data['is_blocked'] = $this_user_is_blocked;
 
 
     if (!empty($_FILES['profile_pic']['name'])) {
    
         try {
-            $upload_image = handle_image($_FILES['profile_pic']);
+            $upload_image = handle_image($_FILES['profile_pic'], 'users');
 
             if ($upload_image['status'] == "success") {
                 // Adding image to our array
                 $data['profile_pic'] = $upload_image['new_file_name'];
                 // Deleting old user profile picture
-                $old_image = MEDIA_ROOT . $user['profile_pic'];
+                $old_image = MEDIA_ROOT . "/users/" . $user['profile_pic'];
                 if (file_exists($old_image)) {
                     unlink($old_image);
                 }
                 // Making and sending our query
-                $query = "UPDATE users SET profile_pic = :profile_pic, username = :username, email = :email, password = :password, is_staff = :is_staff, is_superuser = :is_superuser WHERE id = :id LIMIT 1";
+                $query = "UPDATE users SET profile_pic = :profile_pic, username = :username, email = :email, password = :password, is_staff = :is_staff, is_superuser = :is_superuser, is_blocked = :is_blocked WHERE id = :id LIMIT 1";
                 $query = query_db($query, $data);
                 $message = "User was successfully updated";
                 $message_tag = "success";
@@ -118,11 +125,13 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && isset($_POST['edituser'])) {
     redirect("edituser?id=$this_user_id", $message, $message_tag);
 }
 
+// Generating CSRF Token
+$csrf_token = generate_csrf_token();
 
 $context = [
     'company'=> $company,
     'title'=> $title,
-    'user'=> $user,
+    'admin'=> $admin,
     'this_user'=> $this_user,
 ];
 

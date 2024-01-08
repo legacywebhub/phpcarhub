@@ -20,6 +20,13 @@
   <!-- Custom style CSS -->
   <link rel="stylesheet" href="<?=ROOT; ?>/assets/admin/css/custom.css">
   <link rel='shortcut icon' type='image/x-icon' href="<?=ROOT; ?>/assets/admin/img/favicon.ico" />
+  <!-- Inline style CSS -->
+  <style>
+    .image-preview {
+      width: 100px;
+      height: 100px;
+    }
+  </style>
 </head>
 
 <body>
@@ -44,14 +51,14 @@
           <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
             <?php if (!empty($context['user']['profile_pic'])): ?>
-              <img alt="image" src="<?=fetch_image($context['user']['profile_pic']); ?>" class="user-img-radious-style">
+              <img alt="image" src="<?=fetch_image($context['admin']['profile_pic'], 'users'); ?>" class="user-img-radious-style">
             <?php else: ?>
               <img alt="image" src="<?=ROOT; ?>/assets/admin/img/default.png" class="user-img-radious-style">
             <?php endif ?>
             <span class="d-sm-none d-lg-inline-block"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
-              <div class="dropdown-title">WELCOME <?=$_SESSION['user']; ?></div>
+              <div class="dropdown-title">WELCOME <?=$context['admin']['username']; ?></div>
               <a href="<?=ROOT; ?>/admin/edituser?id=<?=$context['user']['id']; ?>" class="dropdown-item has-icon"> <i class="far fa-user"></i> 
                 Profile
               </a>
@@ -74,7 +81,7 @@
           <div class="sidebar-brand">
             <a href="<?=ROOT; ?>/admin/dashboard">
             <?php if (!empty($context['company']['logo'])): ?>
-              <img alt="image" src="<?=fetch_image($context['company']['logo']); ?>" class="header-logo" />
+              <img alt="image" src="<?=fetch_image($context['company']['logo'], 'users'); ?>" class="header-logo" />
             <?php else: ?>
               <img alt="image" src="<?=ROOT; ?>/assets/admin/img/logo.png" class="header-logo" />
             <?php endif ?>
@@ -98,6 +105,16 @@
               <ul class="dropdown-menu">
                 <li><a  href="<?=ROOT; ?>/admin/cars" class="nav-link">Cars</a></li>
                 <li><a  href="<?=ROOT; ?>/admin/addcar" class="nav-link">Add Car</a></li>
+                <li><a  href="<?=ROOT; ?>/admin/car-images" class="nav-link">Car Images</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="file-text"></i><span>Blog</span></a>
+              <ul class="dropdown-menu">
+                <li><a  href="<?=ROOT; ?>/admin/post-categories" class="nav-link">Categories</a></li>
+                <li><a  href="<?=ROOT; ?>/admin/addcategory" class="nav-link">Add Category</a></li>
+                <li><a  href="<?=ROOT; ?>/admin/posts" class="nav-link">Posts</a></li>
+                <li><a  href="<?=ROOT; ?>/admin/addpost" class="nav-link">Add Post</a></li>
               </ul>
             </li>
             <li class="menu-header">Others</li>
@@ -238,7 +255,93 @@
     <script src="<?=ROOT; ?>/assets/admin/js/scripts.js"></script>
     <!-- Custom JS File -->
     <script src="<?=ROOT; ?>/assets/admin/js/custom.js"></script>
+    <!-- Inline script -->
+    <script>
+      // This function previews single uploaded images from file input
+      let previewImage = (file) => {
+        document.querySelector('.image-preview').src = URL.createObjectURL(file);
+      };
 
+      // This function previews multiple uploaded images from file input 
+      let previewImages = (files) => {
+        // Get the container element where image previews will be displayed
+        let imageContainer = document.querySelector('.image-container');
+        
+        // Clear existing previews
+        imageContainer.innerHTML = '';
+
+        // Loop through each selected file and create a preview
+        for (const file of files) {
+            // Create a new image element
+            let imageElement = document.createElement('img');
+            imageElement.classList.add('image-preview');
+
+            // Set the source of the image element to the URL of the selected file
+            imageElement.src = URL.createObjectURL(file);
+
+            // Append the image element to the container
+            imageContainer.appendChild(imageElement);
+        }
+      };
+
+      // This function previews image from external image link
+      let previewPostImage = (text) => {
+        try {
+          console.log(text);
+
+          // Get the container element where image previews will be displayed
+          let imageContainer = document.querySelector('.image-container');
+        
+          // Clear existing previews
+          imageContainer.innerHTML = '';
+
+          // Create a new image element
+          let imageElement = document.createElement('img');
+          imageElement.classList.add('image-preview');
+          imageElement.style.width = "150px";
+
+          // Set the source of the image element to the URL of the selected file
+          imageElement.src = text;
+
+          // Append the image element to the container
+          imageContainer.appendChild(imageElement);
+          //document.querySelector('.image-preview').src = text;
+        } catch (error) {
+          //console.error('Error previewing image:', error);
+          alert('Error occured. Paste another image address');
+        }
+      };
+
+      // This functions only allows input fields to accept numbers
+      function onlyNumberKey(evt) {
+        // Only ASCII character in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+        return false; 
+        return true;
+        // use onkeypress="return onlyNumberKey(event)" on the input field
+      }
+
+      // Copy texts js
+      function copyText(arg) {
+        console.log('clicked a button');
+        // Get the input or text field
+        //var copyText = document.getElementById("myInput");
+
+        // Select the text field
+        arg.select();
+        arg.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the text inside the text field
+        navigator.clipboard.writeText(arg.value).then(()=>{
+          // Alert the copied text
+          alert("Copied");
+        }).catch(()=>{
+          // Alert the copied text
+          alert("Something went wrong");
+        });
+      }
+    </script>
 </body>
 
 <!-- index.html  21 Nov 2019 03:47:04 GMT -->

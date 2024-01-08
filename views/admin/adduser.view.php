@@ -24,6 +24,7 @@
                 </div>
                 <?php endif ?>
                 <form method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="csrf_token" value="<?=$_SESSION['csrf_token']; ?>">
                     <div class="section-title">Profile Pic </div>
                     <div class="form-group mb-4">
                         <div class="col-sm-12 col-md-7">

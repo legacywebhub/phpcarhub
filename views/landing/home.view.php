@@ -8,8 +8,8 @@
       <div class="carousel-item active" style="background-image: url(<?=ROOT; ?>/assets/landing/img/slide/slide-1.jpg);">
         <div class="carousel-container">
           <div class="carousel-content animate__animated animate__fadeInUp">
-            <h2>Welcome to <span>Flattern</span></h2>
-            <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+            <h2>Welcome to <span class="text-capitalize"><?=$context['company']['name']; ?></span></h2>
+            <p>New or used, find your perfect fit to fuel your journey and unleash your freedom. Start your adventure today with our diverse selection of cars, trucks, and SUVs—let our expert team guide you to the right wheels for your budget and lifestyle!</p>
             <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
           </div>
         </div>
@@ -19,8 +19,8 @@
       <div class="carousel-item" style="background-image: url(<?=ROOT; ?>/assets/landing/img/slide/slide-2.jpg);">
         <div class="carousel-container">
           <div class="carousel-content animate__animated animate__fadeInUp">
-            <h2>Lorem Ipsum Dolor</h2>
-            <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+            <h2>Top-quality parts at competitive prices</h2>
+            <p>Find the perfect fit with our complete inventory of genuine and aftermarket parts for every car. Whether you crave factory precision or performance upgrades, we've got your engine purring again in no time</p>
             <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
           </div>
         </div>
@@ -30,8 +30,8 @@
       <div class="carousel-item" style="background-image: url(<?=ROOT; ?>/assets/landing/img/slide/slide-3.jpg);">
         <div class="carousel-container">
           <div class="carousel-content animate__animated animate__fadeInUp">
-            <h2>Sequi ea ut et est quaerat</h2>
-            <p>Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et est quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse doloremque accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
+            <h2>Incredible repair services</h2>
+            <p>Worried about repairs? Relax and get back on the road in no time with our trustworthy experts. Reliable auto repair you can trust, mile after mile—schedule your appointment today!</p>
             <div class="text-center"><a href="" class="btn-get-started">Read More</a></div>
           </div>
         </div>
@@ -79,43 +79,43 @@
         <div class="col-lg-4 col-md-6">
           <div class="icon-box" data-aos="fade-up">
             <div class="icon"><i class="bi bi-briefcase"></i></div>
-            <h4 class="title"><a href="">Lorem Ipsum</a></h4>
-            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+            <h4 class="title"><a href="">Diverse Selection</a></h4>
+            <p class="description">Whether you're a city cruiser, a weekend warrior, or a family on the go, we have the perfect car, truck, or SUV to match your lifestyle</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-6">
           <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
             <div class="icon"><i class="bi bi-card-checklist"></i></div>
-            <h4 class="title"><a href="">Dolor Sitema</a></h4>
-            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+            <h4 class="title"><a href="">New & Used Options</a></h4>
+            <p class="description">Choose from sparkling new models or reliable pre-owned gems, all meticulously inspected and ready to roll</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-6">
           <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
             <div class="icon"><i class="bi bi-bar-chart"></i></div>
-            <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+            <h4 class="title"><a href="">Genuine & Aftermarket Parts</a></h4>
+            <p class="description">We offer a vast selection of high-quality parts to keep your car running smoothly, at prices that won't break the bank</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-6">
           <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
             <div class="icon"><i class="bi bi-binoculars"></i></div>
-            <h4 class="title"><a href="">Magni Dolores</a></h4>
-            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+            <h4 class="title"><a href="">Top-Tier Repairs</a></h4>
+            <p class="description">Our skilled mechanics will diagnose and fix any issue, big or small, using the latest tools and techniques</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-6">
           <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
             <div class="icon"><i class="bi bi-brightness-high"></i></div>
-            <h4 class="title"><a href="">Nemo Enim</a></h4>
-            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+            <h4 class="title"><a href="">Safety First</a></h4>
+            <p class="description">We prioritize your safety with thorough inspections and adherence to the highest safety standards</p>
           </div>
         </div>
         <div class="col-lg-4 col-md-6">
           <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
             <div class="icon"><i class="bi bi-calendar4-week"></i></div>
-            <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
-            <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+            <h4 class="title"><a href="">Customer Satisfaction</a></h4>
+            <p class="description">Your satisfaction is our top priority. We go the extra mile to ensure you have a positive and hassle-free experience</p>
           </div>
         </div>
       </div>
@@ -241,7 +241,7 @@
 
       <div class="section-title" data-aos="fade-up">
         <h2>Our <strong>Clients</strong></h2>
-        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        <p>More than just cars, we're fueled by the vibrant community of individuals who make our autohub a second home. City savviness, family adventures, weekend escapes, eco-conscious drives, and second-chance seekers—we celebrate the unique stories and dreams behind every wheel</p>
       </div>
 
       <div class="row no-gutters clients-wrap clearfix" data-aos="fade-up">

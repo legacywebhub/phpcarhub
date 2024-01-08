@@ -1,7 +1,7 @@
 <?php
 
 // Authorize user
-$user = logged_in();
+$admin = logged_in();
 
 // Variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
@@ -11,7 +11,7 @@ $settings = query_fetch("SELECT * FROM company");
 $context = [
     'company'=> $company,
     'title'=> $title,
-    'user'=> $user,
+    'admin'=> $admin,
     'settings'=> $settings
 ];
 

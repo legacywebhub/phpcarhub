@@ -60,6 +60,7 @@
                       <label class="custom-control-label" for="remember-me">Remember Me</label>
                     </div>
                   </div>
+                  <input type="hidden" name="csrf_token" value="<?=$_SESSION['csrf_token']; ?>">
                   <div class="form-group">
                     <button name="login" type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
                       Login

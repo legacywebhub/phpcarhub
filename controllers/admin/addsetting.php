@@ -1,7 +1,7 @@
 <?php
 
-// Authorizing user
-$user = logged_in();
+// Authenticating user
+$admin = logged_in();
 
 // Other variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
@@ -9,7 +9,7 @@ $title = ucfirst($company['name'])." | Add Setting";
 
 
 // Handling add setting request
-if ($_SERVER["REQUEST_METHOD"]  == "POST" && isset($_POST['addsetting'])) {
+if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
 
     // Checking if there is an existing record
     $record = query_fetch("SELECT * FROM company");
@@ -64,10 +64,12 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && isset($_POST['addsetting'])) {
     redirect('addsetting', $message, $message_tag);
 }
 
+// Generating CSRF Token
+$csrf_token = generate_csrf_token();
 
 $context = [
     'company'=> $company,
-    'user'=> $user,
+    'admin'=> $admin,
     'title'=> $title,
 ];
 

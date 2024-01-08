@@ -69,6 +69,6 @@ $context = [
     'title'=> $title,
 ];
 
-include("../templates/admin/register.view.php");
+include(APP_PATH . "views/admin/register.view.php");
 
 unset_message();

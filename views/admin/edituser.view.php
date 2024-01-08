@@ -24,9 +24,10 @@
                 </div>
                 <?php endif ?>
                 <form method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="csrf_token" value="<?=$_SESSION['csrf_token']; ?>">
                     <div class="form-group">
                         <div class="section-title">Profile Picture</div>
-                        <img class="image-preview-edit my-3" src="<?=get_image($context['this_user']['profile_pic']); ?>" width="150">
+                        <img class="image-preview-edit my-3" src="<?=fetch_image($context['this_user']['profile_pic'], 'users'); ?>" width="150">
                         <input type="file" onchange="displayImageEdit(this.files[0]);" name="profile_pic" class="form-control">
                     </div>
                     <script>

@@ -1,7 +1,7 @@
 <?php
 
-// Authorizing user
-$user = logged_in();
+// Authenticating user
+$admin = logged_in();
 
 // Authorizing view
 if (!isset($_GET['id'])) {
@@ -15,7 +15,9 @@ if (!isset($_GET['id'])) {
         // redirect back to cars if car does not exists
         redirect('cars');
     } else {
-        $car_id = intval($car['id']);
+        // we use this to store car images
+        // and altenate car id for users
+        $car_id = $car['car_id'];
     }
 }
 
@@ -24,33 +26,9 @@ $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
 $title = ucfirst($company['name'])." | Edit Car";
 
 // Handling edit car request
-if ($_SERVER["REQUEST_METHOD"]  == "POST" && isset($_POST['editcar'])) {
+if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
 
-    // Validate
-    if (empty($_POST['name'])) {
-        $name = $car['name'];
-    } else {
-        $name = $_POST['name'];
-    }
-
-    if (empty($_POST['color'])) {
-        $color = $car['color'];
-    } else {
-        $color = $_POST['color'];
-    }
-
-    if (empty($_POST['description'])) {
-        $description = $car['description'];
-    } else {
-        $description = $_POST['description'];
-    }
-
-    if (empty($_POST['price'])) {
-        $price = $car['price'];
-    } else {
-        $price = intval($_POST['price']);
-    }
-
+    // Checking available button status
     if (!isset($_POST['available'])) {
         $available = 0;
     } else {
@@ -58,63 +36,71 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && isset($_POST['editcar'])) {
     }
 
     // Declaring DB variables in array
-    $data = [];
-    $data['name'] = $name;
-    $data['color'] = $color;
-    $data['description'] = $description;
-    $data['price'] = $price;
-    $data['available'] = $available;
-    $data['id'] = $car_id;
+    $data = [
+        'car_id' => $car_id,
+        'name' => sanitize_input($_POST['name']),
+        'color' => sanitize_input($_POST['color']),
+        'description' => $_POST['description'],
+        'price' => sanitize_input($_POST['price']),
+        'available' => $available
+    ];
 
-    if (empty($_FILES['image']['name'])) {
-        try {
-            $query = "UPDATE cars SET name = :name, color = :color, description = :description, price = :price, available = :available WHERE id = :id LIMIT 1";
-            $query = query_db($query, $data);
-            $message = "Car details was successfully updated";
-            $message_tag = "success";
-            redirect('cars', $message, $message_tag);
-        } catch(Exception $error) {
-            $message = "Error while saving data: $error";
-            $message_tag = "danger";
-        }
+    try {
+        $query = "UPDATE cars SET name = :name, color = :color, description = :description, price = :price, available = :available WHERE car_id = :car_id LIMIT 1";
+        $query = query_db($query, $data);
 
-    } else {
-        $upload_image = handle_image($_FILES['image']);
+        // Updating car images
+        if (!empty($_FILES['images'])) {
+            // Deleting previous car images
+            $car_images = query_fetch("SELECT * FROM car_images WHERE car_id = '$car_id'");
+            // Looping through all connected image
+            foreach($car_images as $car_image) {
+                $image_name = $car_image['image'];
+                // Creating link or path to the image file
+                $filename = MEDIA_PATH.'cars/'.$image_name;
 
-        try {
-            if ($upload_image['status'] == "success") {
-                // Getting our new file name
-                $data['image'] = $upload_image['new_file_name'];
-                // Deleting previous linked file
-                $old_image = MEDIA_ROOT . $car['image'];
-                if (file_exists($old_image)) {
-                    // Deleting image
-                    unlink($old_image);
+                if (file_exists($filename)) {
+                    // Deleting image from media folder
+                    unlink($filename);
                 }
-                // Making our DB Query
-                $query = "UPDATE cars SET image = :image, name = :name, color = :color, description = :description, price = :price, available = :available WHERE id = :id LIMIT 1";
-                $query = query_db($query, $data);
-                $message = "Car detail was successfully updated";
+                // Deleting image record from database
+                query_fetch("DELETE FROM car_images WHERE image = '$image_name' LIMIT 1");
+            }
+            // Uploading new images
+            $uploaded_images = handle_multiple_image($_FILES['images'], 'cars');
+
+            if ($uploaded_images['status'] == "success" || $uploaded_images['status'] == "partial") {
+
+                // Saving each image to DB
+                foreach ($uploaded_images['images'] as $image) {
+                    $query = "INSERT INTO car_images (car_id, image) VALUES (:car_id, :image)";
+                    $query = query_db($query, ['car_id'=>$car_id, 'image'=>$image]);
+                }
+                $message = "Car and ". $uploaded_images['total_uploaded'] ." image was uploaded successfully";
                 $message_tag = "success";
                 redirect('cars', $message, $message_tag);
             } else {
-                // Setting upload error message
-                $message = $upload_image['message'];
-                $message_tag = "danger";
+                $message = "Car was uploaded successfully without images";
+                $message_tag = "success";
+                redirect('cars', $message, $message_tag);
             }
-        } catch(Exception $error) {
-            $message = "Error while saving data: $error";
-            $message_tag = "danger";
         }
-
+        $message = "Car details was successfully updated";
+        $message_tag = "success";
+        redirect('cars', $message, $message_tag);
+    } catch(Exception $error) {
+        $message = "Error while saving data: $error";
+        $message_tag = "danger";
     }
     redirect("editcar?id=$car_id", $message, $message_tag);
 }
 
+// Generating CSRF Token
+$csrf_token = generate_csrf_token();
 
 $context = [
     'company'=> $company,
-    'user'=> $user,
+    'admin'=> $admin,
     'title'=> $title,
     'car'=> $car
 ];

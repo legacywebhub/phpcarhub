@@ -21,9 +21,12 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && isset($_POST['login'])) {
             if ($user['is_staff'] == 0) {
                 redirect('login', "Unauthorized access", 'danger');
             } else {
-                // Set user session id
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['user'] = $user['username'];
+                // Unset any previous session
+                if (isset($_SESSION['user'])) {
+                    unset($_SESSION['user']);
+                }
+                // Set new user session id
+                $_SESSION['user'] = $user;
                 redirect('dashboard');
             }
         } else {
@@ -39,6 +42,6 @@ $context = [
 ];
 
 
-include(APP_PATH . "templates/admin/login.view.php");
+include(APP_PATH . "views/admin/login.view.php");
 
 unset_message();

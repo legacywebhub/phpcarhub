@@ -1,7 +1,7 @@
 <?php
 
-// Authorizing user
-$user = logged_in();
+// Authenticating user
+$admin = logged_in();
 
 // Redirecting if no setting ID was provided
 if (!isset($_GET['id'])) {
@@ -22,7 +22,7 @@ $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
 $title = ucfirst($company['name'])." | Edit Setting";
 
 // Handling incoming post request
-if ($_SERVER["REQUEST_METHOD"]  == "POST" && isset($_POST['editsetting'])) {
+if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
     // Declaring variables
     $data = [];
     $data['id'] = $setting_id;
@@ -100,10 +100,12 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && isset($_POST['editsetting'])) {
     
 }
 
+// Generating CSRF Token
+$csrf_token = generate_csrf_token();
 
 $context = [
     'company'=> $company,
-    'user'=> $user,
+    'admin'=> $admin,
     'title'=> $title,
     'setting' => $setting
 ];

@@ -40,7 +40,7 @@
                     <table class="table table-striped">
                     <tbody>
                     <tr>
-                        <th>Image</th>
+                        <th>Images</th>
                         <th>Car Name</th>
                         <th>Color</th>
                         <th>Price</th>
@@ -58,7 +58,19 @@
                         <?php foreach($context['cars']['result'] as $car): ?>
                         <tr class="mt-2" style="margin-top: 10px !important;">
                             <td>
-                                <img src="<?=get_image($car['image']); ?>" width="100">
+                                <?php
+                                $car_id = $car['car_id'];
+                                $car_images = query_fetch("SELECT * FROM car_images WHERE car_id = '$car_id'");
+                                
+                                if (empty($car_images)) {
+                                    echo "No Image";
+                                } else {
+                                    foreach($car_images as $car_image) {
+                                        echo '<img  width="30" src="'.MEDIA_ROOT.'/cars/'.$car_image["image"].'">';
+                                    }
+                                }
+                                
+                                ?>
                             </td>
                             <td><?=$car['name']; ?></td>
                             <td><?=$car['color']; ?></td>

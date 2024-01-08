@@ -7,7 +7,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <h2>About</h2>
         <ol>
-          <li><a href="index.html">Home</a></li>
+          <li><a href="home">Home</a></li>
           <li>About</li>
         </ol>
       </div>
@@ -23,30 +23,30 @@
         <div class="image col-xl-5 d-flex align-items-stretch justify-content-center justify-content-lg-start" data-aos="fade-right"></div>
         <div class="col-xl-7 ps-0 ps-lg-5 pe-lg-1 d-flex align-items-stretch">
           <div class="content d-flex flex-column justify-content-center">
-            <h3 data-aos="fade-up">Voluptatem dignissimos provident quasi</h3>
+            <h3 data-aos="fade-up">WHO ARE WE?</h3>
             <p data-aos="fade-up">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+            We're not just an autohub, we're a launchpad for adventures. Whether you're a city cruiser or a weekend warrior, we fuel your journey with diverse wheels and expert care
             </p>
             <div class="row">
               <div class="col-md-6 icon-box" data-aos="fade-up">
                 <i class="bx bx-receipt"></i>
-                <h4>Corporis voluptates sit</h4>
-                <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+                <h4>Our philosophy and what we believe</h4>
+                <p>We believe the perfect car is out there for everyone. That's why we offer a diverse selection, expert guidance, and top-notch service to get you behind the wheel of your automotive dream</p>
               </div>
               <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
                 <i class="bx bx-cube-alt"></i>
-                <h4>Ullamco laboris nisi</h4>
-                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+                <h4>Your Trusted Auto Companions</h4>
+                <p>From new car excitement to reliable repairs, we're your one-stop shop for all things automotive. We take the hassle out of the road, so you can focus on enjoying the ride</p>
               </div>
               <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
                 <i class="bx bx-images"></i>
-                <h4>Labore consequatur</h4>
-                <p>Aut suscipit aut cum nemo deleniti aut omnis. Doloribus ut maiores omnis facere</p>
+                <h4>More Than Just Mechanics, We're Gearheads</h4>
+                <p>We're passionate about cars, and it shows in everything we do. We treat your vehicle like our own, because we know it's more than just metal and rubber, it's an extension of your adventures</p>
               </div>
               <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
                 <i class="bx bx-shield"></i>
-                <h4>Beatae veritatis</h4>
-                <p>Expedita veritatis consequuntur nihil tempore laudantium vitae denat pacta</p>
+                <h4>Join the Automotive Family</h4>
+                <p>At our autohub, you're not just a customer, you're part of the family. We're here to support you every mile of the way, because we know getting there is half the fun</p>
               </div>
             </div>
           </div><!-- End .content-->
@@ -62,7 +62,7 @@
 
       <div class="section-title" data-aos="fade-up">
         <h2>Our <strong>Team</strong></h2>
-        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        <p>Meet the crew who keeps your automotive world humming! From sales champions with infectious enthusiasm to skilled mechanics with grease-stained smiles. Our team is a blend of expertise and passion.</p>
       </div>
 
       <div class="row">

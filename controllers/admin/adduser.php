@@ -1,7 +1,7 @@
 <?php
 
-// Authorizing user
-$user = logged_in();
+// Authenticating user
+$admin = logged_in();
 
 // Other variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
@@ -9,7 +9,7 @@ $title = ucfirst($company['name'])." | Add User";
 
 
 // Handling add user request
-if ($_SERVER["REQUEST_METHOD"]  == "POST" && isset($_POST['adduser'])) {
+if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
 
     // Validating and determing DB insert values
     if ($_POST['password1'] != $_POST['password2']) {
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && isset($_POST['adduser'])) {
     if (!empty($_FILES['profile_pic']['name'])) {
         // If logo image was sent
         try {
-            $upload_image = handle_image($_FILES['profile_pic']);
+            $upload_image = handle_image($_FILES['profile_pic'], 'users');
 
             if ($upload_image['status'] == "success") {
                 // Adding image to our array
@@ -82,9 +82,11 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && isset($_POST['adduser'])) {
     redirect('adduser', $message, $message_tag);
 }
 
+// Generating CSRF Token
+$csrf_token = generate_csrf_token();
 
 $context = [
-    'user'=> $user,
+    'admin'=> $admin,
     'title'=> $title,
     'company'=> $company,
 ];

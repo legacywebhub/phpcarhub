@@ -20,13 +20,21 @@
             </div>
         <?php endif ?>
         <form action="" method="post" enctype="multipart/form-data">
-            <div class="form-group row mb-4">
+            <input type="hidden" name="csrf_token" value="<?=$_SESSION['csrf_token']; ?>">
+            <!-- <div class="form-group row mb-4">
                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Car Image <span class="text-danger">*</span></label>
                 <div class="col-sm-12 col-md-7">
                 <div id="image-preview" class="image-preview">
                     <label for="image-upload" id="image-label">Choose File</label>
                     <input name="image" type="file" name="image" id="image-upload" multiple />
                 </div>
+                </div>
+            </div> -->
+            <div class="image-container my-3 text-center"></div>
+            <div class="form-group row mb-4">
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Choose Images <span class="text-danger">*</span></label>
+                <div class="col-sm-12 col-md-7">
+                <input type="file" multiple name="images[]" class="form-control" onchange="previewImages(this.files)" required>
                 </div>
             </div>
             <div class="form-group row mb-4">
@@ -55,7 +63,7 @@
             <div class="form-group row mb-4">
                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description <span class="text-danger">*</span></label>
                 <div class="col-sm-12 col-md-7">
-                <textarea name="description" class="form-control" required></textarea>
+                <textarea name="description" class="form-control" maxlength="10500" required></textarea>
                 </div>
             </div>
             <div class="form-group row mb-4">
@@ -64,37 +72,10 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">N</div>
                 </div>
-                <input name="price" type="number" class="form-control currency" required>
+                <input type="text" name="price" class="form-control currency" maxlength="30" onkeypress="return onlyNumberKey(event)" required>
                 </div>
             </div>
             <!--
-            <div class="form-group row mb-4">
-                <label class="col-form-label text-md-right col-sm-6 col-md-3 col-lg-3">Available</label>
-                <div class="selectgroup w-50" style="margin-left: 15px;">
-                <label class="selectgroup-item">
-                    <input type="radio" name="available" value=1 class="selectgroup-input-radio" checked>
-                    <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-check"></i></span>
-                </label>
-                <label class="selectgroup-item">
-                    <input type="radio" name="available" value=0 class="selectgroup-input-radio" disabled>
-                    <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-times"></i></span>
-                </label>
-                </div>
-            </div>
-            <div class="form-group row mb-4">
-                <label class="col-form-label text-md-right col-sm-6 col-md-3 col-lg-3">Available</label>
-                <div class="selectgroup selectgroup-pills" style="margin-left: 15px;">
-                <label class="selectgroup-item">
-                    <input type="radio" name="icon-input" value="1" class="selectgroup-input" checked>
-                    <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-check"></i></span>
-                </label>
-                <label class="selectgroup-item">
-                    <input type="radio" name="icon-input" value="2" class="selectgroup-input">
-                    <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-times"></i></span>
-                </label>
-                </div>
-            </div>
-            -->
             <div class="form-group row mb-4 mt-2">
                 <div class="control-label col-form-label text-md-right col-sm-6 col-md-3 col-lg-3">Available</div>
                 <label class="custom-switch">
@@ -102,6 +83,7 @@
                 <span class="custom-switch-indicator"></span>
                 </label>
             </div>
+            -->
             <div class="form-group row my-3">
                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                 <div class="col-sm-12 col-md-7">

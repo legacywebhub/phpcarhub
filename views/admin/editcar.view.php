@@ -20,32 +20,36 @@
             </div>
         <?php endif ?>
         <form action="" method="post" enctype="multipart/form-data">
-            <div class="form-group row mb-4">
-                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3" style="visibility: hidden;">Preview</label>
-                <img class="image-preview-edit my-3" src="<?=get_image($context['car']['image']); ?>" width="100">
+            <input type="hidden" name="csrf_token" value="<?=$_SESSION['csrf_token']; ?>">
+            <div class="image-container my-3 text-center">
+                <?php
+                    $car_id = $context['car']['car_id'];
+                    $car_images = query_fetch("SELECT * FROM car_images WHERE car_id = '$car_id'");
+                    
+                    if (!empty($car_images)) {
+                        foreach($car_images as $car_image) {
+                            echo '<img  width="100" src="'.MEDIA_ROOT.'/cars/'.$car_image["image"].'">';
+                        }
+                    }
+                ?>
             </div>
             <div class="form-group row mb-4">
-                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Car Image</label>
+                <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Choose Images</label>
                 <div class="col-sm-12 col-md-7">
-                <input name="image" type="file" onchange="displayImageEdit(this.files[0]);">
+                    <input type="file" multiple name="images[]" class="form-control" onchange="previewImages(this.files)">
                 </div>
             </div>
-            <script>
-                let displayImageEdit = (file) => {
-                    document.querySelector('.image-preview-edit').src = URL.createObjectURL(file);
-                };
-            </script>
             <div class="form-group row mb-4">
                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
                 <div class="col-sm-12 col-md-7">
-                <input name="name" value="<?=$context['car']['name']; ?>" maxlength="60" type="text" class="form-control">
+                <input name="name" value="<?=$context['car']['name']; ?>" maxlength="60" type="text" class="form-control" required>
                 </div>
             </div>
             <div class="form-group row mb-4">
                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Color</label>
                 <div class="col-sm-12 col-md-7">
-                <select name="color" value="<?=$context['car']['color']; ?>" class="form-control selectric">
-                    <option value="">Select Color</option>
+                <select name="color" class="form-control selectric" required>
+                    <option value="<?=$context['car']['color']; ?>">Select Color</option>
                     <option value="Black">Black</option>
                     <option value="White">White</option>
                     <option value="Silver">Silver</option>
@@ -56,13 +60,13 @@
                     <option value="Reddish Brown">Reddish Brown</option>
                     <option value="Others">Others</option>
                 </select>
-                <small>Current color: <?=$context['car']['color']; ?></small>
+                <small class="text-info">Current color: <?=$context['car']['color']; ?></small>
                 </div>
             </div>
             <div class="form-group row mb-4">
                 <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
                 <div class="col-sm-12 col-md-7">
-                <textarea name="description" class="form-control"><?=$context['car']['description']; ?></textarea>
+                <textarea name="description" class="form-control" required><?=$context['car']['description']; ?></textarea>
                 </div>
             </div>
             <div class="form-group row mb-4">
@@ -71,13 +75,17 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">N</div>
                 </div>
-                <input name="price" value="<?=$context['car']['price']; ?>" type="number" class="form-control currency">
+                <input type="number" class="form-control currency" name="price" value="<?=$context['car']['price']; ?>" onkeypress="return onlyNumberKey(event)" required>
                 </div>
             </div>
             <div class="form-group row mb-4 mt-2">
                 <div class="control-label col-form-label text-md-right col-sm-6 col-md-3 col-lg-3">Available</div>
                 <label class="custom-switch">
-                <input type="checkbox" name="available" class="custom-switch-input">
+                <?php if ($context['car']['available']==1): ?>
+                    <input type="checkbox" name="available" class="custom-switch-input" checked>
+                <?php else: ?>
+                    <input type="checkbox" name="available" class="custom-switch-input">
+                <?php endif ?>
                 <span class="custom-switch-indicator"></span>
                 </label>
             </div>

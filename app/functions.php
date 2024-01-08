@@ -86,7 +86,8 @@ function admin_logged_in() {
     // This function depends on is_user_authenticated() function
     if (empty($user) || $user['is_staff'] == 0) {
         // Redirect if no user found or user is no admin
-        redirect("login");
+        $url = ROOT."/admin/login";
+        redirect($url, "Please sign in", "danger");
     }
     return $user;
 }
@@ -225,7 +226,7 @@ function generate_unique_id($length = 10) {
 }
 
 // FUNCTION TO VALIDATE AND UPLOAD IMAGES
-function handle_image($file) {
+function handle_image($file, string $folder = '') {
     $file_name = $file['name'];
     $file_tmp_name = $file['tmp_name'];
     $file_size = $file['size'];
@@ -234,7 +235,7 @@ function handle_image($file) {
 
     if ($file_error === 0) {
         // If no errors
-        if ($file_size > 2097152) {
+        if ($file_size > 5242880) {
             $response = [
                 'status'=>"failed",
                 'message'=> "File size is too large. Maximum allowable file size is 2mb"
@@ -255,7 +256,7 @@ function handle_image($file) {
                 // Generating a new unique name and appending to the file extension
                 $new_file_name = uniqid("IMG-", true).'.'.$file_extension;
                 // Defining the upload path
-                $image_upload_path = MEDIA_PATH . $new_file_name;
+                $image_upload_path = MEDIA_PATH . '/' .  $folder . '/' . $new_file_name;
                 // Moving uploaded file to defined upload path
                 move_uploaded_file($file_tmp_name, $image_upload_path);
                 // Giving positive feedback or response
@@ -275,6 +276,92 @@ function handle_image($file) {
         $response = [
             'status'=>"failed",
             'message'=> "Unknown error occured"
+        ];
+    }
+    return $response;
+}
+
+// FUNCTION TO REORGANISE MULTIPLE $_FILES OBJECTS
+function organise_files($files) {
+
+    // New empty array
+    $organized_files = array();
+    
+    foreach ($files as $key => $fileAttributes) {
+        foreach ($fileAttributes as $index => $value) {
+            $organized_files[$index][$key] = $value;
+        }
+    }
+    
+    // Now $organized_files is an array of arrays
+    // each representing a single file
+    return $organized_files;
+}
+
+// FUNCTION TO VALIDATE AND UPLOAD IMAGES
+function handle_multiple_image($files, string $folder = '') {
+    // Reorganising files
+    $files = organise_files($files);
+    // Number of files passed
+    $total_files = count($files);
+    // Default state
+    $uploaded_files = [];
+    $total_uploaded = 0;
+
+    foreach($files as $file) {
+        $file_name = $file['name'];
+        $file_tmp_name = $file['tmp_name'];
+        $file_size = $file['size'];
+        $file_error = $file['error'];
+        
+
+        if ($file_error === 0 && $file_size < 5242880) {
+            // If no errors and file size is below size limit (5mb)
+    
+            // Extracting file extension from file name
+            $file_extension = pathinfo($file_name, PATHINFO_EXTENSION);
+            // Setting file extension to lowercase
+            $file_extension = strtolower($file_extension);
+            // Allowable extensions
+            $accepted_extensions = array('jpeg', 'jpg', 'png');
+
+            if (in_array($file_extension, $accepted_extensions)) {
+                // If file extension is among accepted extensions
+
+                // Generating a new unique name and appending to the file extension
+                $new_file_name = uniqid("IMG-", true).'.'.$file_extension;
+                // Defining the upload path
+                $image_upload_path = MEDIA_PATH . '/' . $folder . '/' . $new_file_name;
+                // Moving uploaded file to defined upload path
+                move_uploaded_file($file_tmp_name, $image_upload_path);
+                // Adding new file to uploaded file list
+                array_push($uploaded_files, $new_file_name);
+                // Increment files uploaded
+                $total_uploaded++;
+            }
+
+        }
+    };
+
+    if ($total_uploaded == $total_files) {
+        $response = [
+            'status'=>"success",
+            'message'=> "All images uploaded successfully",
+            'images' => $uploaded_files,
+            'total_uploaded'=> $total_uploaded
+        ];
+    } else if ($total_uploaded > 0 && $total_uploaded < $total_files) {
+        $response = [
+            'status'=>"partial",
+            'message'=> $total_uploaded." out of ".$total_files." images uploaded succesfully",
+            'images' => $uploaded_files,
+            'total_uploaded'=> $total_uploaded
+        ];
+    } else if ($total_uploaded == 0) {
+        $response = [
+            'status'=>"failed",
+            'message'=> "No image was uploaded",
+            'total_uploaded'=> $total_uploaded
         ];
     }
     return $response;
@@ -329,12 +416,12 @@ function paginate(string $query, int $results_per_page) {
 }
 
 // FUNCTION TO FETCH IMAGE
-function fetch_image($image) {
-    if ($image == null || !file_exists(APP_PATH . "media/$image")) {
+function fetch_image($image, $folder) {
+    if ($image == null || !file_exists(APP_PATH . "media/$folder/$image")) {
         // If file does not exist or null
         return STATIC_ROOT . "/no_image.png";
     } else {
-        return MEDIA_ROOT . "/$image";
+        return MEDIA_ROOT . "/$folder/$image";
     }
 }
 
@@ -346,6 +433,26 @@ function fetch_user(int $id) {
         return $matched_users[0]['username'];
     }
     return "No User";
+}
+
+// FUNCTION TO FETCH POST CATEGORIES USING THEIR IDS
+function fetch_post_category(int $id) {
+    $matched_categories = query_fetch("SELECT * FROM post_categories WHERE id = $id LIMIT 1");
+
+    if (!empty($matched_categories)) {
+        return $matched_categories[0]['category'];
+    }
+    return "Invalid Category";
+}
+
+// FUNCTION TO FETCH POSTS USING THEIR IDS
+function fetch_post(int $id) {
+    $matched_posts = query_fetch("SELECT * FROM posts WHERE id = $id LIMIT 1");
+
+    if (!empty($matched_posts)) {
+        return truncate_string($matched_posts[0]['title'], 5);
+    }
+    return "Invalid Post";
 }
 
 // FUNCTION TO SEND MAIL
@@ -440,78 +547,6 @@ function check_new(string $date) {
         return true;
     }
     return false;
-}
-
-// FUNCTION TO DEBIT OR CREDIT USER BALANCE
-function update_account(int $user_id, string $action, $amount) {
-    $user = query_fetch("SELECT * FROM users WHERE id = $user_id LIMIT 1")[0];
-
-    if ($action == 'credit') {
-        $new_balance = $user['balance'] + $amount;
-        // Updating user balance
-        $sql = "UPDATE users SET balance = :balance WHERE id = :id LIMIT 1";
-        $query = query_db($sql, ['balance'=>$new_balance, 'id'=>$user_id]);
-        // Notifying user
-        $sql = "INSERT INTO notifications (user_id, message) VALUES (:user_id, :message)";
-        $query = query_db($sql, ['user_id'=> $user_id, 'message'=>"Your account was credited with $$amount"]);
-        return true;
-    } else if ($action == 'debit' && $amount <= $user['balance']) {
-        $new_balance = $user['balance'] - $amount;
-        // Updating user balance
-        $sql = "UPDATE users SET balance = :balance WHERE id = :id LIMIT 1";
-        $query = query_db($sql, ['balance'=>$new_balance, 'id'=>$user_id]);
-        // Notifying user
-        $sql = "INSERT INTO notifications (user_id, message) VALUES (:user_id, :message)";
-        $query = query_db($sql, ['user_id'=> $user_id, 'message'=>"$$amount was debited from your account"]);
-        return true;
-    }
-    return false; // Return false by default
-}
-
-// FUNCTION TO UPDATE HANDLE INVESTMENTS
-function update_investment(int $user_id) {
-    // Fetching running investments
-    $investments = query_fetch("SELECT * FROM investments WHERE user_id = $user_id AND status = 'approved'");
-
-    foreach ($investments as $investment) {
-        // Getting necessary date and timestamps
-        $now = new DateTime('now', new DateTimeZone('UTC'));
-        $today = $now->getTimestamp();
-        $approved_date = strtotime($investment['approved_date']);
-        $end_date = strtotime($investment['end_date']);
-
-        // If today is within investment date
-        if ($today < $end_date && $today > $approved_date) {
-            $interval = $investment['profit_interval'];
-            $days_after_approval = ($today - $approved_date) / (60*60*24);
-
-            if ($days_after_approval >= $interval) {
-                // If days after approval equal or greater than profit interval
-                // Then calculate the supposed returns for that interval
-                $current_interval = floor($days_after_approval / $interval);
-                $current_returns = round($investment['profit_per_interval'] * $current_interval, 2);
-
-                // Update investment returns
-                if ($investment['returns'] !== $current_returns) {
-                    $sql = "UPDATE investments SET returns = :returns WHERE id = :id LIMIT 1";
-                    $query = query_db($sql, ['returns'=>$current_returns, 'id'=>$investment['id']]);
-                }
-            }
-        // Else if today is beyond end date of investment
-        } else if ($today >= $end_date && $investment['returns'] !== $investment['roi']) {
-            // Getting roi
-            $roi = $investment['roi'];
-            // Completing investment
-            $sql = "UPDATE investments SET returns = :returns, status = :status WHERE id = :id LIMIT 1";
-            $query = query_db($sql, ['returns'=>$roi, 'status'=>"completed", 'id'=>$investment['id']]);
-            // Crediting user
-            //update_account($user_id, "credit", $roi);
-            // Notifying user
-            $sql = "INSERT INTO notifications (user_id, message, date) VALUES (:user_id, :message, :date)";
-            $query = query_db($sql, ['user_id'=> $user_id, 'message'=>"Your plan of $".$investment['amount']." has completed successfully and $$roi returned. View plan to reinvest or cashout", 'date'=>$investment['end_date']]);
-            // Send Mail if necessary
-        }
-    }
 }
 
 // FUNCTION TO DELETE OLD USER NOTIFICATIONS

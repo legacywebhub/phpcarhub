@@ -1,7 +1,7 @@
 <?php
 
-// Authorizing user
-$user = logged_in();
+// Authenticating user
+$admin = logged_in();
 
 // View variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
@@ -18,7 +18,7 @@ if (isset($_GET['search'])) {
 $context = [
     'company'=> $company,
     'title'=> $title,
-    'user'=> $user,
+    'admin'=> $admin,
     'cars'=> $cars
 ];
 

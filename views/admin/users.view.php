@@ -58,7 +58,7 @@
                         <?php foreach($context['users']['result'] as $user): ?>
                         <tr class="mt-2" style="margin-top: 10px !important;">
                             <td>
-                                <img src="<?=get_image($user['profile_pic']); ?>" width="100">
+                                <img src="<?=fetch_image($user['profile_pic'], 'users'); ?>" width="100">
                             </td>
                             <td><?=$user['username']; ?></td>
                             <td><?=$user['email']; ?></td>
@@ -78,7 +78,7 @@
                             </td>
                             <td><?=date("d-m-Y", strtotime($user['date_joined'])); ?></td>
                             <td>
-                            <?php if($context['user']['is_superuser'] == 1): ?>
+                            <?php if($context['admin']['is_superuser'] == 1): ?>
                                 <a href="edituser?id=<?=$user['id']; ?>" class="btn btn-primary btn-action" data-toggle="tooltip" title="Edit" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
                                 <a href="deleteuser?id=<?=$user['id']; ?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-original-title="Delete"><i class="fas fa-trash"></i></a>
                             <?php else: ?>

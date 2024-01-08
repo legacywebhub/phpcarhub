@@ -1,7 +1,7 @@
 <?php
 
 // Authorize user
-$user = logged_in();
+$admin = logged_in();
 
 // Redirecting user if id not provided
 if (!isset($_GET['id'])) {

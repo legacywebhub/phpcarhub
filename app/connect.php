@@ -108,17 +108,90 @@ function create_tables() {
     $statement = $con->prepare($query);
     $statement->execute();
 
+    // Car category table
+    $query = "create table if not exists car_categories(
+
+        id int primary key auto_increment,
+        category varchar(100) not null,
+        
+        key name (category),
+        unique (category)
+
+    )";
+    $statement = $con->prepare($query);
+    $statement->execute();
+
     $query = "create table if not exists cars(
 
         id int primary key auto_increment,
-        user_id int null,
-        image varchar(250) not null,
+        car_id varchar(12) not null,
         name varchar(60) not null,
         color varchar(60) null,
         description text(2050) null,
         price int not null,
         available tinyint default 0,
-        date_uploaded datetime default current_timestamp
+        date_uploaded datetime default current_timestamp,
+
+        key name (car_id),
+        unique (car_id)
+    )";
+    $statement = $con->prepare($query);
+    $statement->execute();
+
+    // Car images table  
+    $query = "create table if not exists car_images(
+
+        id int primary key auto_increment,
+        car_id varchar(12) not null,
+        image varchar(1050) not null
+        
+    )";
+    $statement = $con->prepare($query);
+    $statement->execute();
+
+    // Post category table
+    $query = "create table if not exists post_categories(
+
+        id int primary key auto_increment,
+        category varchar(100) not null,
+        
+        key name (category),
+        unique (category)
+
+    )";
+    $statement = $con->prepare($query);
+    $statement->execute();
+
+    // Post table
+    $query = "create table if not exists posts(
+
+        id int primary key auto_increment,
+        user_id int not null,
+        category_id int not null,
+        image varchar(2050) null,
+        slug varchar(200) not null,
+        title varchar(200) not null,
+        content text(50500) not null,
+        quote varchar(300) null,
+        created_at datetime default current_timestamp,
+        last_modified datetime null,
+
+        key name (slug),
+        unique (slug)
+
+    )";
+    $statement = $con->prepare($query);
+    $statement->execute();
+
+    $query = "create table if not exists comments(
+
+        id int primary key auto_increment,
+        user_id int unsigned null,
+        name varchar(30) null,
+        email varchar(60) null,
+        post_id int unsigned not null,
+        comment text(1050) not null,
+        date datetime default current_timestamp
 
     )";
     $statement = $con->prepare($query);

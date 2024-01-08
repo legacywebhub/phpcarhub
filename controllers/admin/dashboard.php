@@ -1,7 +1,7 @@
 <?php
 
-// Authorizing user
-$user = logged_in();
+// Authenticating user
+$admin = logged_in();
 
 // Other variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 $context = [
     'company'=> $company,
     'title'=> $title,
-    'user'=> $user,
+    'admin'=> $admin,
     'total_users'=> $total_users,
     'total_staffs'=> $total_staffs,
     'total_cars'=> $total_cars,
