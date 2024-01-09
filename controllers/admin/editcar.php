@@ -1,7 +1,7 @@
 <?php
 
 // Authenticating user
-$admin = logged_in();
+$admin = admin_logged_in();
 
 // Authorizing view
 if (!isset($_GET['id'])) {

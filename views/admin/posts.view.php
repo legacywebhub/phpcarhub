@@ -1,15 +1,3 @@
-<style>
-    .buttons {
-        margin: 30px 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .table {
-        font-size: 18px;
-    }
-</style>
-
 <div class="row">
     <div class="col-lg-12 col-md-12 col-12 col-sm-12">
         <div class="card">
@@ -77,7 +65,7 @@
                     </table>
                 </div>
 
-                <div class="buttons">
+                <div class="pag-btns">
                 <span style="margin: 0px 10px;">Showing Page <b><?=$context['posts']['page'] ?></b> 0f <b><?=$context['posts']['num_of_pages'] ?></b></span>
                     <nav aria-label="Page navigation example">
                     <ul class="pagination">

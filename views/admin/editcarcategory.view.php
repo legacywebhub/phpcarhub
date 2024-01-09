@@ -1,14 +1,3 @@
-<style>
-    .form-check {
-        display: inline-block;
-        margin-right: 30px;
-    }
-    .form-check label {
-        font-size: 18px;
-        font-weight: bold;
-    }
-</style>
-
 <div class="row">
     <div class="col-12">
         <div class="card">

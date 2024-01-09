@@ -1,9 +1,3 @@
-<style>
-    .table {
-        font-size: 18px;
-    }
-</style>
-
 <div class="row">
     <div class="col-lg-12 col-md-12 col-12 col-sm-12">
         <div class="card">
@@ -46,7 +40,7 @@
                             <?php if(empty($setting['logo'])): ?>
                                 <td>-</td>
                             <?php else: ?>
-                                <td><img src="<?=get_image($setting['logo']); ?>" width="100"></td>
+                                <td><img src="<?=fetch_image($setting['logo'], 'company'); ?>" width="100"></td>
                             <?php endif ?>
                             <td><?=$setting['name']; ?></td>
                             <td><?=$setting['email']; ?></td>

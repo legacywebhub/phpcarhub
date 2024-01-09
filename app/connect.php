@@ -94,6 +94,7 @@ function create_tables() {
 
         id int primary key auto_increment,
         profile_pic varchar(250) null,
+        fullname varchar(60) null,
         username varchar(30) not null,
         email varchar(60) not null,
         password varchar(255) not null,

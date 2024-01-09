@@ -1,7 +1,7 @@
 <?php
 
 // Authenticating user
-$admin = logged_in();
+$admin = admin_logged_in();
 
 // Redirecting if no setting ID was provided
 if (!isset($_GET['id'])) {

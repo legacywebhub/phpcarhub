@@ -1,10 +1,3 @@
-<style>
-    input {
-        font-size: 18px !important;
-        font-weight: bold;
-    }
-</style>
-
 <div class="row">
     <div class="col-12">
     <div class="card">

@@ -22,6 +22,27 @@
   <link rel='shortcut icon' type='image/x-icon' href="<?=ROOT; ?>/assets/admin/img/favicon.ico" />
   <!-- Inline style CSS -->
   <style>
+    .form-check {
+        display: inline-block;
+        margin-right: 30px;
+    }
+    .form-check label {
+        font-size: 18px;
+        font-weight: bold;
+    }
+    input {
+        font-size: 18px !important;
+        font-weight: bold;
+    }
+    .table {
+        font-size: 15px;
+    }
+    .pag-btns {
+        margin: 30px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .image-preview {
       width: 100px;
       height: 100px;
@@ -59,7 +80,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
               <div class="dropdown-title">WELCOME <?=$context['admin']['username']; ?></div>
-              <a href="<?=ROOT; ?>/admin/edituser?id=<?=$context['user']['id']; ?>" class="dropdown-item has-icon"> <i class="far fa-user"></i> 
+              <a href="<?=ROOT; ?>/admin/edituser?id=<?=$context['admin']['id']; ?>" class="dropdown-item has-icon"> <i class="far fa-user"></i> 
                 Profile
               </a>
               <a href="<?=ROOT; ?>/admin/cars" class="dropdown-item has-icon"> <i class="fas fa-car"></i>

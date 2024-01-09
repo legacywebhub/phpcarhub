@@ -1,11 +1,3 @@
-<style>
-    .buttons {
-        margin-top: 70px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
 <div class="row">
     <div class="col-12 col-lg-12">
     <div class="card">
@@ -37,7 +29,7 @@
             <?php endif ?>
             </ul>
 
-            <div class="buttons">
+            <div class="pag-btns">
                 <span style="margin: 0px 10px;">Showing Page <b><?=$context['messages']['page'] ?></b> 0f <b><?=$context['messages']['num_of_pages'] ?></b></span>
                 <nav aria-label="Page navigation example">
                 <ul class="pagination">

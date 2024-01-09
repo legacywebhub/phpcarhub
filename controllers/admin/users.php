@@ -1,7 +1,7 @@
 <?php
 
 // Authorizing user
-$admin = logged_in();
+$admin = admin_logged_in();
 
 // View variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
