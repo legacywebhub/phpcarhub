@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION[
     // Declaring DB variables as PHP array
     $data = [
         'id' => intval($category['id']),
-        'category' => sanitize_input($_POST['category'])
+        'category' => strtolower(sanitize_input($_POST['category']))
     ];
     
     try {

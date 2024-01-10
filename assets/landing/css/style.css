@@ -1327,6 +1327,7 @@ section {
 .blog .entry .entry-img {
   max-height: 440px;
   margin: -30px -30px 20px -30px;
+  margin-left: 5px !important;
   overflow: hidden;
 }
 .blog .entry .entry-title {
@@ -1368,14 +1369,15 @@ section {
   display: inline-block;
   line-height: 1;
 }
-.blog .entry .entry-content p {
+.blog .entry .entry-content {
   line-height: 24px;
 }
-.blog .entry .entry-content .read-more {
+.read-more {
   -moz-text-align-last: right;
   text-align-last: right;
+  margin: 30px 0;
 }
-.blog .entry .entry-content .read-more a {
+.read-more a {
   display: inline-block;
   background: #ad1b30;
   color: #fff;
@@ -1384,15 +1386,15 @@ section {
   font-size: 14px;
   border-radius: 4px;
 }
-.blog .entry .entry-content .read-more a:hover {
-  background: #fd490f;
+.read-more a:hover {
+  background: #2b2320;
 }
 .blog .entry .entry-content h3 {
   font-size: 22px;
   margin-top: 30px;
   font-weight: bold;
 }
-.blog .entry .entry-content blockquote {
+.blockquote {
   overflow: hidden;
   background-color: #fafafa;
   padding: 60px;
@@ -1400,7 +1402,7 @@ section {
   text-align: center;
   margin: 20px 0;
 }
-.blog .entry .entry-content blockquote p {
+.blockquote p {
   color: #4d4643;
   line-height: 1.6;
   margin-bottom: 0;
@@ -1408,7 +1410,7 @@ section {
   font-weight: 500;
   font-size: 22px;
 }
-.blog .entry .entry-content blockquote::after {
+.blockquote::after {
   content: "";
   position: absolute;
   left: 0;
@@ -1653,7 +1655,7 @@ section {
   line-height: 0;
 }
 .blog .sidebar .search-form form button:hover {
-  background: #fd4509;
+  background: #2b2320;
 }
 .blog .sidebar .categories ul {
   list-style: none;

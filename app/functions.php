@@ -435,6 +435,16 @@ function fetch_user(int $id) {
     return "No User";
 }
 
+// FUNCTION TO FETCH USERS USING THEIR IDS
+function fetchUser(int $id) {
+    $matched_users = query_fetch("SELECT * FROM users WHERE id = $id LIMIT 1");
+
+    if (!empty($matched_users)) {
+        return $matched_users[0]['fullname'];
+    }
+    return "No User";
+}
+
 // FUNCTION TO FETCH CAR CATEGORIES USING THEIR IDS
 function fetch_car_category(int $id) {
     $matched_categories = query_fetch("SELECT * FROM car_categories WHERE id = $id LIMIT 1");
@@ -453,6 +463,20 @@ function fetch_post_category(int $id) {
         return $matched_categories[0]['category'];
     }
     return "Invalid Category";
+}
+
+// FUNCTION TO RETURN TOTAL POST OF A CATEGORY
+function post_category_total($category_id) {
+    $category_id = intval($category_id);
+    $total = query_fetch("SELECT COUNT(*) AS category_total FROM posts WHERE category_id = $category_id")[0]['category_total'];
+    return $total;
+}
+
+// FUNCTION TO FETCH TOTAL COMMENT FOR POST
+function post_comments_total($post_id) {
+    $post_id = intval($post_id);
+    $total = query_fetch("SELECT COUNT(*) AS total_comments FROM comments WHERE post_id = $post_id")[0]['total_comments'];
+    return $total;
 }
 
 // FUNCTION TO FETCH POSTS USING THEIR IDS
@@ -586,6 +610,23 @@ function truncate_string($text, $limit) {
     } else {
         return $text;
     }
+}
+
+// FUNCTION TO TRUNCATE HTML CONTENT TO CERTAIN LIMIT
+function truncate_HTML($html, $length) {
+    // Strip tags, but allow <p> and <a> tags
+    //$text = strip_tags($html, '<p><a>');
+    $text = strip_tags($html);
+
+    // Truncate the text
+    $truncatedText = mb_substr($text, 0, $length);
+
+    // Add ellipsis if the text is truncated
+    if (mb_strlen($text) > $length) {
+        $truncatedText .= '...';
+    }
+
+    return $truncatedText;
 }
 
 // FUNCTION TO CREATE SLUG FROM A TEXT

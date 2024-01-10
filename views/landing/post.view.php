@@ -5,11 +5,11 @@
     <div class="container">
 
       <div class="d-flex justify-content-between align-items-center">
-        <h2>Blog Single</h2>
+        <h2>Post</h2>
         <ol>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li>Blog Single</li>
+          <li><a href="home">Home</a></li>
+          <li><a href="blog">Blog</a></li>
+          <li>Post</li>
         </ol>
       </div>
 
@@ -25,75 +25,37 @@
         <div class="col-lg-8 entries">
 
           <article class="entry entry-single">
-
+            <?php if($context['post']['image']): ?>
             <div class="entry-img">
-              <img src="<?=ROOT; ?>/assets/landing/img/blog/blog-1.jpg" alt="" class="img-fluid">
+              <img src="<?=$context['post']['image']; ?>" alt="" class="img-fluid">
             </div>
-
+            <?php endif ?>
             <h2 class="entry-title">
-              <a href="blog-single.html">Dolorum optio tempore voluptas dignissimos cumque fuga qui quibusdam quia</a>
+              <a href="javascript:void(0);"><?=$context['post']['title']; ?></a>
             </h2>
 
             <div class="entry-meta">
               <ul>
-                <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="blog-single.html">John Doe</a></li>
-                <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="blog-single.html"><time datetime="2020-01-01">Jan 1, 2020</time></a></li>
-                <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="blog-single.html">12 Comments</a></li>
+                <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a href="javascript:void(0);"><?=fetch_user($context['post']['user_id']); ?></a></li>
+                <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a href="javascript:void(0);"><?=format_datetime($context['post']['created_at']); ?></a></li>
+                <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i> <a href="javascript:void(0);"><?=post_comments_total($context['post']['id']); ?> Comments</a></li>
               </ul>
             </div>
 
-            <div class="entry-content">
-              <p>
-                Similique neque nam consequuntur ad non maxime aliquam quas. Quibusdam animi praesentium. Aliquam et laboriosam eius aut nostrum quidem aliquid dicta.
-                Et eveniet enim. Qui velit est ea dolorem doloremque deleniti aperiam unde soluta. Est cum et quod quos aut ut et sit sunt. Voluptate porro consequatur assumenda perferendis dolore.
-              </p>
-
-              <p>
-                Sit repellat hic cupiditate hic ut nemo. Quis nihil sunt non reiciendis. Sequi in accusamus harum vel aspernatur. Excepturi numquam nihil cumque odio. Et voluptate cupiditate.
-              </p>
-
-              <blockquote>
-                <p>
-                  Et vero doloremque tempore voluptatem ratione vel aut. Deleniti sunt animi aut. Aut eos aliquam doloribus minus autem quos.
-                </p>
-              </blockquote>
-
-              <p>
-                Sed quo laboriosam qui architecto. Occaecati repellendus omnis dicta inventore tempore provident voluptas mollitia aliquid. Id repellendus quia. Asperiores nihil magni dicta est suscipit perspiciatis. Voluptate ex rerum assumenda dolores nihil quaerat.
-                Dolor porro tempora et quibusdam voluptas. Beatae aut at ad qui tempore corrupti velit quisquam rerum. Omnis dolorum exercitationem harum qui qui blanditiis neque.
-                Iusto autem itaque. Repudiandae hic quae aspernatur ea neque qui. Architecto voluptatem magni. Vel magnam quod et tempora deleniti error rerum nihil tempora.
-              </p>
-
-              <h3>Et quae iure vel ut odit alias.</h3>
-              <p>
-                Officiis animi maxime nulla quo et harum eum quis a. Sit hic in qui quos fugit ut rerum atque. Optio provident dolores atque voluptatem rem excepturi molestiae qui. Voluptatem laborum omnis ullam quibusdam perspiciatis nulla nostrum. Voluptatum est libero eum nesciunt aliquid qui.
-                Quia et suscipit non sequi. Maxime sed odit. Beatae nesciunt nesciunt accusamus quia aut ratione aspernatur dolor. Sint harum eveniet dicta exercitationem minima. Exercitationem omnis asperiores natus aperiam dolor consequatur id ex sed. Quibusdam rerum dolores sint consequatur quidem ea.
-                Beatae minima sunt libero soluta sapiente in rem assumenda. Et qui odit voluptatem. Cum quibusdam voluptatem voluptatem accusamus mollitia aut atque aut.
-              </p>
-              <img src="<?=ROOT; ?>/assets/landing/img/blog/blog-inside-post.jpg" class="img-fluid" alt="">
-
-              <h3>Ut repellat blanditiis est dolore sunt dolorum quae.</h3>
-              <p>
-                Rerum ea est assumenda pariatur quasi et quam. Facilis nam porro amet nostrum. In assumenda quia quae a id praesentium. Quos deleniti libero sed occaecati aut porro autem. Consectetur sed excepturi sint non placeat quia repellat incidunt labore. Autem facilis hic dolorum dolores vel.
-                Consectetur quasi id et optio praesentium aut asperiores eaque aut. Explicabo omnis quibusdam esse. Ex libero illum iusto totam et ut aut blanditiis. Veritatis numquam ut illum ut a quam vitae.
-              </p>
-              <p>
-                Alias quia non aliquid. Eos et ea velit. Voluptatem maxime enim omnis ipsa voluptas incidunt. Nulla sit eaque mollitia nisi asperiores est veniam.
-              </p>
-
+            <div class="entry-content my-5">
+              <?=htmlspecialchars_decode($context['post']['content']); ?>
             </div>
+
+            <?php if($context['post']['quote']): ?>
+            <blockquote class="blockquote my-5">
+                <p><?=$context['post']['quote']; ?></p>
+            </blockquote>
+            <?php endif ?>
 
             <div class="entry-footer">
-              <i class="bi bi-folder"></i>
-              <ul class="cats">
-                <li><a href="#">Business</a></li>
-              </ul>
-
               <i class="bi bi-tags"></i>
               <ul class="tags">
-                <li><a href="#">Creative</a></li>
-                <li><a href="#">Tips</a></li>
-                <li><a href="#">Marketing</a></li>
+                <li><a href="posts?category=<?=fetch_post_category($context['post']['category_id']); ?>"><?=fetch_post_category($context['post']['category_id']); ?></a></li>
               </ul>
             </div>
 
@@ -102,11 +64,11 @@
           <div class="blog-author d-flex align-items-center">
             <img src="<?=ROOT; ?>/assets/landing/img/blog/blog-author.jpg" class="rounded-circle float-left" alt="">
             <div>
-              <h4>Jane Smith</h4>
+              <h4><?=fetch_user($context['post']['user_id']); ?></h4>
               <div class="social-links">
-                <a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
-                <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
-                <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
+                <a href="javascript:void(0);"><i class="bi bi-twitter"></i></a>
+                <a href="javascript:void(0);"><i class="bi bi-facebook"></i></a>
+                <a href="javascript:void(0);"><i class="biu bi-instagram"></i></a>
               </div>
               <p>
                 Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus accusantium. Quas repellat voluptatem officia numquam sint aspernatur voluptas. Esse et accusantium ut unde voluptas.
@@ -116,119 +78,64 @@
 
           <div class="blog-comments">
 
-            <h4 class="comments-count">8 Comments</h4>
+            <h4 class="comments-count"><?=post_comments_total($context['post']['id']); ?> Comments</h4>
 
-            <div id="comment-1" class="comment">
-              <div class="d-flex">
-                <div class="comment-img"><img src="<?=ROOT; ?>/assets/landing/img/blog/comments-1.jpg" alt=""></div>
-                <div>
-                  <h5><a href="">Georgia Reader</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
-                  <time datetime="2020-01-01">01 Jan, 2020</time>
-                  <p>
-                    Et rerum totam nisi. Molestiae vel quam dolorum vel voluptatem et et. Est ad aut sapiente quis molestiae est qui cum soluta.
-                    Vero aut rerum vel. Rerum quos laboriosam placeat ex qui. Sint qui facilis et.
-                  </p>
-                </div>
-              </div>
-            </div><!-- End comment #1 -->
+            <?php 
+              $post_id  = intval($context['post']['id']);
+              $comments = query_fetch("SELECT * FROM comments WHERE post_id = $post_id"); 
+            ?>
 
-            <div id="comment-2" class="comment">
-              <div class="d-flex">
-                <div class="comment-img"><img src="<?=ROOT; ?>/assets/landing/img/blog/comments-2.jpg" alt=""></div>
-                <div>
-                  <h5><a href="">Aron Alvarado</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
-                  <time datetime="2020-01-01">01 Jan, 2020</time>
-                  <p>
-                    Ipsam tempora sequi voluptatem quis sapiente non. Autem itaque eveniet saepe. Officiis illo ut beatae.
-                  </p>
-                </div>
-              </div>
-
-              <div id="comment-reply-1" class="comment comment-reply">
+            <?php if (!empty($comments)): ?> 
+              <?php foreach($comments as $comment): ?>
+              <div id="comment-2" class="comment">
                 <div class="d-flex">
-                  <div class="comment-img"><img src="<?=ROOT; ?>/assets/landing/img/blog/comments-3.jpg" alt=""></div>
+                  <div class="comment-img"><img src="<?=ROOT; ?>/assets/admin/img/default.png" alt=""></div>
                   <div>
-                    <h5><a href="">Lynda Small</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
-                    <time datetime="2020-01-01">01 Jan, 2020</time>
+                    <h5><a href="javascript:void(0);"><?=$comment['name']; ?></a> <a href="javascript:void(0);" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
+                    <time><?=format_datetime($comment['date']); ?></time>
                     <p>
-                      Enim ipsa eum fugiat fuga repellat. Commodi quo quo dicta. Est ullam aspernatur ut vitae quia mollitia id non. Qui ad quas nostrum rerum sed necessitatibus aut est. Eum officiis sed repellat maxime vero nisi natus. Amet nesciunt nesciunt qui illum omnis est et dolor recusandae.
-
-                      Recusandae sit ad aut impedit et. Ipsa labore dolor impedit et natus in porro aut. Magnam qui cum. Illo similique occaecati nihil modi eligendi. Pariatur distinctio labore omnis incidunt et illum. Expedita et dignissimos distinctio laborum minima fugiat.
-
-                      Libero corporis qui. Nam illo odio beatae enim ducimus. Harum reiciendis error dolorum non autem quisquam vero rerum neque.
+                      <?=$comment['comment']; ?>
                     </p>
                   </div>
                 </div>
+              </div><!-- End comment #2-->
+              <?php endforeach ?>
+            <?php endif ?>
 
-                <div id="comment-reply-2" class="comment comment-reply">
-                  <div class="d-flex">
-                    <div class="comment-img"><img src="<?=ROOT; ?>/assets/landing/img/blog/comments-4.jpg" alt=""></div>
-                    <div>
-                      <h5><a href="">Sianna Ramsay</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
-                      <time datetime="2020-01-01">01 Jan, 2020</time>
-                      <p>
-                        Et dignissimos impedit nulla et quo distinctio ex nemo. Omnis quia dolores cupiditate et. Ut unde qui eligendi sapiente omnis ullam. Placeat porro est commodi est officiis voluptas repellat quisquam possimus. Perferendis id consectetur necessitatibus.
-                      </p>
-                    </div>
-                  </div>
-
-                </div><!-- End comment reply #2-->
-
-              </div><!-- End comment reply #1-->
-
-            </div><!-- End comment #2-->
-
-            <div id="comment-3" class="comment">
-              <div class="d-flex">
-                <div class="comment-img"><img src="<?=ROOT; ?>/assets/landing/img/blog/comments-5.jpg" alt=""></div>
-                <div>
-                  <h5><a href="">Nolan Davidson</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
-                  <time datetime="2020-01-01">01 Jan, 2020</time>
-                  <p>
-                    Distinctio nesciunt rerum reprehenderit sed. Iste omnis eius repellendus quia nihil ut accusantium tempore. Nesciunt expedita id dolor exercitationem aspernatur aut quam ut. Voluptatem est accusamus iste at.
-                    Non aut et et esse qui sit modi neque. Exercitationem et eos aspernatur. Ea est consequuntur officia beatae ea aut eos soluta. Non qui dolorum voluptatibus et optio veniam. Quam officia sit nostrum dolorem.
-                  </p>
-                </div>
-              </div>
-
-            </div><!-- End comment #3 -->
-
-            <div id="comment-4" class="comment">
-              <div class="d-flex">
-                <div class="comment-img"><img src="<?=ROOT; ?>/assets/landing/img/blog/comments-6.jpg" alt=""></div>
-                <div>
-                  <h5><a href="">Kay Duggan</a> <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a></h5>
-                  <time datetime="2020-01-01">01 Jan, 2020</time>
-                  <p>
-                    Dolorem atque aut. Omnis doloremque blanditiis quia eum porro quis ut velit tempore. Cumque sed quia ut maxime. Est ad aut cum. Ut exercitationem non in fugiat.
-                  </p>
-                </div>
-              </div>
-
-            </div><!-- End comment #4 -->
 
             <div class="reply-form">
               <h4>Leave a Reply</h4>
               <p>Your email address will not be published. Required fields are marked * </p>
-              <form action="">
+              <form method="post">
                 <div class="row">
+                  <input name="csrf_token" type="hidden" value="<?=$_SESSION['csrf_token']; ?>">
+                  <input name="post_id" type="hidden" class="form-control" value=<?=$context['post']['id']; ?>>
+                  <?php if(empty($_SESSION['user'])): ?>
                   <div class="col-md-6 form-group">
-                    <input name="name" type="text" class="form-control" placeholder="Your Name*">
+                    <input name="name" type="text" class="form-control" maxlength="30" placeholder="Your Name*" required>
                   </div>
                   <div class="col-md-6 form-group">
-                    <input name="email" type="text" class="form-control" placeholder="Your Email*">
+                    <input name="email" type="text" class="form-control" maxlength="60" placeholder="Your Email*" required>
                   </div>
+                  <input name="user_id" type="hidden" class="form-control" value="">
+                  <?php else: ?>
+                    <input name="user_id" type="hidden" class="form-control" value=<?=$_SESSION['user']['id']; ?> required>
+                    <input name="name" type="hidden" class="form-control" value="<?=$_SESSION['user']['username']; ?>" required>
+                    <input name="email" type="hidden" class="form-control" value="<?=$_SESSION['user']['email']; ?>" required>
+                  <?php endif ?>
                 </div>
                 <div class="row">
                   <div class="col form-group">
-                    <input name="website" type="text" class="form-control" placeholder="Your Website">
+                    <textarea name="comment" class="form-control" maxlength="500" placeholder="Your Comment*" required></textarea>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col form-group">
-                    <textarea name="comment" class="form-control" placeholder="Your Comment*"></textarea>
-                  </div>
+                <?php if (isset($_SESSION['message'])): ?>
+                <div class="form-group">
+                    <h6 class="col-12 text-<?=$_SESSION['message_tag']; ?>" style="display: flex; justify-content: center;">
+                        <?=$_SESSION['message']; ?>
+                    </h6>
                 </div>
+                <?php endif ?>
                 <button type="submit" class="btn btn-primary">Post Comment</button>
 
               </form>
@@ -245,8 +152,8 @@
 
             <h3 class="sidebar-title">Search</h3>
             <div class="sidebar-item search-form">
-              <form action="">
-                <input type="text">
+              <form method="get">
+                <input type="text" name="search">
                 <button type="submit"><i class="bi bi-search"></i></button>
               </form>
             </div><!-- End sidebar search formn-->
@@ -254,63 +161,34 @@
             <h3 class="sidebar-title">Categories</h3>
             <div class="sidebar-item categories">
               <ul>
-                <li><a href="#">General <span>(25)</span></a></li>
-                <li><a href="#">Lifestyle <span>(12)</span></a></li>
-                <li><a href="#">Travel <span>(5)</span></a></li>
-                <li><a href="#">Design <span>(22)</span></a></li>
-                <li><a href="#">Creative <span>(8)</span></a></li>
-                <li><a href="#">Educaion <span>(14)</span></a></li>
+                <?php foreach($context['post_categories'] as $post_category): ?>
+                <li><a href="posts?category=<?=$post_category['category']; ?>" class="text-capitalize"><?=$post_category['category']; ?> <span>(<?=post_category_total($post_category['id']);?>)</span></a></li>
+                <?php endforeach ?>
               </ul>
             </div><!-- End sidebar categories-->
 
             <h3 class="sidebar-title">Recent Posts</h3>
             <div class="sidebar-item recent-posts">
-              <div class="post-item clearfix">
-                <img src="<?=ROOT; ?>/assets/landing/img/blog/blog-recent-1.jpg" alt="">
-                <h4><a href="blog-single.html">Nihil blanditiis at in nihil autem</a></h4>
-                <time datetime="2020-01-01">Jan 1, 2020</time>
-              </div>
-
-              <div class="post-item clearfix">
-                <img src="<?=ROOT; ?>/assets/landing/img/blog/blog-recent-2.jpg" alt="">
-                <h4><a href="blog-single.html">Quidem autem et impedit</a></h4>
-                <time datetime="2020-01-01">Jan 1, 2020</time>
-              </div>
-
-              <div class="post-item clearfix">
-                <img src="<?=ROOT; ?>/assets/landing/img/blog/blog-recent-3.jpg" alt="">
-                <h4><a href="blog-single.html">Id quia et et ut maxime similique occaecati ut</a></h4>
-                <time datetime="2020-01-01">Jan 1, 2020</time>
-              </div>
-
-              <div class="post-item clearfix">
-                <img src="<?=ROOT; ?>/assets/landing/img/blog/blog-recent-4.jpg" alt="">
-                <h4><a href="blog-single.html">Laborum corporis quo dara net para</a></h4>
-                <time datetime="2020-01-01">Jan 1, 2020</time>
-              </div>
-
-              <div class="post-item clearfix">
-                <img src="<?=ROOT; ?>/assets/landing/img/blog/blog-recent-5.jpg" alt="">
-                <h4><a href="blog-single.html">Et dolores corrupti quae illo quod dolor</a></h4>
-                <time datetime="2020-01-01">Jan 1, 2020</time>
-              </div>
+              <?php foreach($context['recent_posts'] as $recent_post): ?>
+                <div class="post-item clearfix">
+                  <?php if($recent_post['image']): ?>
+                    <img src="<?=$recent_post['image']; ?>" alt="">
+                  <?php else: ?>
+                    <img src="<?=ROOT; ?>/assets/post_default.jpg" alt="">
+                  <?php endif ?>
+                  <h4><a href="post?title=<?=$recent_post['slug']; ?>"><?=$recent_post['title']; ?></a></h4>
+                  <time><?=format_datetime($recent_post['created_at']); ?></time>
+                </div>
+              <?php endforeach ?>
 
             </div><!-- End sidebar recent posts-->
 
             <h3 class="sidebar-title">Tags</h3>
             <div class="sidebar-item tags">
               <ul>
-                <li><a href="#">App</a></li>
-                <li><a href="#">IT</a></li>
-                <li><a href="#">Business</a></li>
-                <li><a href="#">Mac</a></li>
-                <li><a href="#">Design</a></li>
-                <li><a href="#">Office</a></li>
-                <li><a href="#">Creative</a></li>
-                <li><a href="#">Studio</a></li>
-                <li><a href="#">Smart</a></li>
-                <li><a href="#">Tips</a></li>
-                <li><a href="#">Marketing</a></li>
+                <?php foreach($context['post_categories'] as $post_category): ?>
+                <li><a href="posts?category=<?=$post_category['category']; ?>" class="text-capitalize"><?=$post_category['category']; ?></a></li>
+                <?php endforeach ?>
               </ul>
             </div><!-- End sidebar tags-->
 

@@ -138,6 +138,7 @@
                 <li><a  href="<?=ROOT; ?>/admin/addpostcategory" class="nav-link">Add Category</a></li>
                 <li><a  href="<?=ROOT; ?>/admin/posts" class="nav-link">Posts</a></li>
                 <li><a  href="<?=ROOT; ?>/admin/addpost" class="nav-link">Add Post</a></li>
+                <li><a  href="<?=ROOT; ?>/admin/comments" class="nav-link">Comments</a></li>
               </ul>
             </li>
             <li class="menu-header">Others</li>

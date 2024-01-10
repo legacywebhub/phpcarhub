@@ -14,15 +14,14 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION[
     // Declaring DB variables as PHP array
     $data = [
         'post_id' => intval(sanitize_input($_POST['post_id'])),
-        'user_id' => intval(sanitize_input($_POST['user_id'])),
         'name' => sanitize_input($_POST['name']),
         'email' => sanitize_input($_POST['email']),
         'comment' => sanitize_input($_POST['comment'])
     ];
     
     try {
-        $query = "INSERT INTO comments (post_id, user_id, name, email, comment) 
-        VALUES (:post_id, :user_id, :name, :email, :comment)";
+        $query = "INSERT INTO comments (post_id, name, email, comment) 
+        VALUES (:post_id, :name, :email, :comment)";
         $query = query_db($query, $data);
         $message = "Comment was successfully added";
         $message_tag = "success";

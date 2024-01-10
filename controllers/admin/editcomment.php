@@ -33,23 +33,17 @@ $title = ucfirst($company['name'])." | Edit Comment";
 // Handling update comment request
 if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
 
-    // Checking if Admin is superuser
-    if ($admin['is_superuser'] == 0) {
-        redirect("comments", "Sorry.. You don't have such privilege", "danger");
-    }
 
     // Declaring DB variables as PHP array
     $data = [
         'id' => intval($comment['id']),
-        'post_id' => intval(sanitize_input($_POST['post_id'])),
-        'user_id' => intval(sanitize_input($_POST['user_id'])),
         'name' => sanitize_input($_POST['name']),
         'email' => sanitize_input($_POST['email']),
         'comment' => sanitize_input($_POST['comment'])
     ];
     
     try {
-        $query = "UPDATE comments SET post_id = :post_id, user_id = :user_id, name = :name, email = :email, comment = :comment WHERE id = :id LIMIT 1";
+        $query = "UPDATE comments SET name = :name, email = :email, comment = :comment WHERE id = :id LIMIT 1";
         $query = query_db($query, $data);
         $message = "Comment was successfully updated";
         $message_tag = "success";

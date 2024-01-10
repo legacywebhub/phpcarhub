@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION[
     
     try {
         $query = "INSERT INTO post_categories (category) VALUES (:category)";
-        $query = query_db($query, ['category' => sanitize_input($_POST['category'])]);
+        $query = query_db($query, ['category' => strtolower(sanitize_input($_POST['category']))]);
         $message = "Category was successfully added";
         $message_tag = "success";
         redirect('post-categories', $message, $message_tag);
