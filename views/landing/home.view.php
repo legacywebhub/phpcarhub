@@ -1,3 +1,55 @@
+<style>
+#about {
+  margin: 0rem .2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap !important;
+}
+
+#about div {
+  width: 500px;
+  margin: 0px 20px;
+}
+
+.about-img img {
+  width: 100%;
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.about-text h6, .about-text h3  {
+  color: #dc3545;
+}
+
+.car-img {
+  width: 100%;
+  height: 250px;
+}
+
+.brands {
+  margin-top: 0px !important;
+}
+
+.brand-container {
+  width: 100vw;
+}
+
+.brand-container img {
+  width: 100%;
+}
+
+@media only screen and (max-width: 650px) {
+  .car-img {
+    width: 100%;
+    height: 300px;
+  }
+}
+</style>
 <!-- ======= Hero Section ======= -->
 <section id="hero">
   <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -60,20 +112,37 @@
 
       <div class="row">
         <div class="col-lg-9 text-center text-lg-left">
-          <h3>We've created more than <span>200 websites</span> this year!</h3>
-          <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <h3>We've sold more than <span>200 cars</span> this year!</h3>
+          <p>Our service and parts departments also deserve recognition for helping keep these cars in top shape before and after purchase. From major repairs to routine maintenance to installing the latest accessories, our mechanics and technicians play a major role in our sales success.</p>
         </div>
         <div class="col-lg-3 cta-btn-container text-center">
-          <a class="cta-btn align-middle" href="#">Request a quote</a>
+          <a class="cta-btn align-middle" href="javascript:void(0);">Request a quote</a>
         </div>
       </div>
 
     </div>
   </section><!-- End Cta Section -->
 
+  <!-- ======= About Section ======= -->
+  <section id="about">
+    <div class="about-text">
+      <h3>About us</h3>
+      <h6>At <span class="text-capitalize"><?=$context['company']['name']; ?></span>, we are your one-stop shop for all things automotive!</h6>
+      <p>But we don't just sell cars - we also keep them running smoothly for years to come. Our service technicians are factory-trained professionals who can handle everything from routine maintenance to major repairs. We use only top-quality parts and fluids to ensure your car continues performing at its best.</p>
+      <p>We also offer a full stock of automotive parts and accessories. Need new brakes, a battery, tires, or a performance upgrade? We've got it in stock or can order it for you right away. With competitive pricing, we make it easy to get the parts you need to keep your ride in tip-top shape.</p>
+      <p>Our experienced sales staff can help you find the perfect new or used car to fit your needs and budget. We have a huge selection of makes and models, so you're sure to drive off our lot satisfied.</p>
+    </div>
+    <div class="about-img">
+      <img src="<?=ROOT; ?>/assets/landing/img/mechanic.jpg" alt="">
+    </div>
+  </section><!-- End About Section -->
+
   <!-- ======= Services Section ======= -->
   <section id="services" class="services">
     <div class="container">
+      <div class="section-title" data-aos="fade-up">
+        <h2>Our <strong>Features</strong></h2>
+      </div>
 
       <div class="row">
         <div class="col-lg-4 col-md-6">
@@ -131,172 +200,47 @@
         <div class="col-lg-12 d-flex justify-content-center">
           <ul id="portfolio-flters">
             <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">App</li>
-            <li data-filter=".filter-card">Card</li>
-            <li data-filter=".filter-web">Web</li>
+            <?php foreach($context['car_categories'] as $car_category): ?>
+            <li data-filter=".filter-<?=$car_category['category']; ?>"><?=$car_category['category']; ?></li>
+            <?php endforeach ?>
           </ul>
         </div>
       </div>
 
       <div class="row portfolio-container" data-aos="fade-up">
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <img src="<?=ROOT; ?>/assets/landing/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
+        <?php foreach($context['cars'] as $car): ?>
+          <?php 
+            $car_id = $car['car_id'];
+            $car_image = query_fetch("SELECT * FROM car_images WHERE car_id = '$car_id' LIMIT 1")[0];
+          ?>
+        <div class="col-lg-4 col-md-6 col-sm-12 my-4 portfolio-item filter-<?=fetch_car_category($car['category_id']); ?>">
+          <img src="<?=fetch_image($car_image['image'], 'cars'); ?>" class="car-img" alt="">
           <div class="portfolio-info">
-            <h4>App 1</h4>
-            <p>App</p>
-            <a href="<?=ROOT; ?>/assets/landing/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 1"><i class="bx bx-plus"></i></a>
+            <h4><?=$car['name']; ?></h4>
+            <p>N<?=$car['price']; ?></p>
+            <a href="<?=fetch_image($car_image['image'], 'cars'); ?>" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="<?=$car['name']; ?>"><i class="bx bx-plus"></i></a>
             <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
           </div>
         </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-          <img src="<?=ROOT; ?>/assets/landing/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-          <div class="portfolio-info">
-            <h4>Web 3</h4>
-            <p>Web</p>
-            <a href="<?=ROOT; ?>/assets/landing/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <img src="<?=ROOT; ?>/assets/landing/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-          <div class="portfolio-info">
-            <h4>App 2</h4>
-            <p>App</p>
-            <a href="<?=ROOT; ?>/assets/landing/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 2"><i class="bx bx-plus"></i></a>
-            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-          <img src="<?=ROOT; ?>/assets/landing/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
-          <div class="portfolio-info">
-            <h4>Card 2</h4>
-            <p>Card</p>
-            <a href="<?=ROOT; ?>/assets/landing/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 2"><i class="bx bx-plus"></i></a>
-            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-          <img src="<?=ROOT; ?>/assets/landing/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
-          <div class="portfolio-info">
-            <h4>Web 2</h4>
-            <p>Web</p>
-            <a href="<?=ROOT; ?>/assets/landing/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 2"><i class="bx bx-plus"></i></a>
-            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <img src="<?=ROOT; ?>/assets/landing/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
-          <div class="portfolio-info">
-            <h4>App 3</h4>
-            <p>App</p>
-            <a href="<?=ROOT; ?>/assets/landing/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="App 3"><i class="bx bx-plus"></i></a>
-            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-          <img src="<?=ROOT; ?>/assets/landing/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
-          <div class="portfolio-info">
-            <h4>Card 1</h4>
-            <p>Card</p>
-            <a href="<?=ROOT; ?>/assets/landing/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 1"><i class="bx bx-plus"></i></a>
-            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-          <img src="<?=ROOT; ?>/assets/landing/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
-          <div class="portfolio-info">
-            <h4>Card 3</h4>
-            <p>Card</p>
-            <a href="<?=ROOT; ?>/assets/landing/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Card 3"><i class="bx bx-plus"></i></a>
-            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-          <img src="<?=ROOT; ?>/assets/landing/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
-          <div class="portfolio-info">
-            <h4>Web 3</h4>
-            <p>Web</p>
-            <a href="<?=ROOT; ?>/assets/landing/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="Web 3"><i class="bx bx-plus"></i></a>
-            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
-          </div>
-        </div>
+        <?php endforeach ?>
 
       </div>
 
     </div>
   </section><!-- End Portfolio Section -->
 
-  <!-- ======= Our Clients Section ======= -->
-  <section id="clients" class="clients">
+  <!-- ======= Brands Section ======= -->
+  <section class="brands">
     <div class="container">
-
       <div class="section-title" data-aos="fade-up">
-        <h2>Our <strong>Clients</strong></h2>
+        <h2>Popular car <strong>Brands</strong></h2>
         <p>More than just cars, we're fueled by the vibrant community of individuals who make our autohub a second home. City savviness, family adventures, weekend escapes, eco-conscious drives, and second-chance seekers—we celebrate the unique stories and dreams behind every wheel</p>
       </div>
-
-      <div class="row no-gutters clients-wrap clearfix" data-aos="fade-up">
-
-        <div class="col-lg-3 col-md-4 col-xs-6">
-          <div class="client-logo">
-            <img src="<?=ROOT; ?>/assets/landing/img/clients/client-1.png" class="img-fluid" alt="">
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-4 col-xs-6">
-          <div class="client-logo">
-            <img src="<?=ROOT; ?>/assets/landing/img/clients/client-2.png" class="img-fluid" alt="">
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-4 col-xs-6">
-          <div class="client-logo">
-            <img src="<?=ROOT; ?>/assets/landing/img/clients/client-3.png" class="img-fluid" alt="">
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-4 col-xs-6">
-          <div class="client-logo">
-            <img src="<?=ROOT; ?>/assets/landing/img/clients/client-4.png" class="img-fluid" alt="">
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-4 col-xs-6">
-          <div class="client-logo">
-            <img src="<?=ROOT; ?>/assets/landing/img/clients/client-5.png" class="img-fluid" alt="">
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-4 col-xs-6">
-          <div class="client-logo">
-            <img src="<?=ROOT; ?>/assets/landing/img/clients/client-6.png" class="img-fluid" alt="">
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-4 col-xs-6">
-          <div class="client-logo">
-            <img src="<?=ROOT; ?>/assets/landing/img/clients/client-7.png" class="img-fluid" alt="">
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-4 col-xs-6">
-          <div class="client-logo">
-            <img src="<?=ROOT; ?>/assets/landing/img/clients/client-8.png" class="img-fluid" alt="">
-          </div>
-        </div>
-
-      </div>
-
     </div>
-  </section><!-- End Our Clients Section -->
+
+    <div class="brand-container">
+      <img src="<?=ROOT; ?>/assets/landing/img/clients/brands-1.jpg" alt="">
+    </div>
+  </section><!-- End Brands Section -->
 
 </main><!-- End #main -->

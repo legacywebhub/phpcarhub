@@ -7,7 +7,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <h2>Contact</h2>
         <ol>
-          <li><a href="index.html">Home</a></li>
+          <li><a href="home">Home</a></li>
           <li>Contact</li>
         </ol>
       </div>
@@ -32,19 +32,19 @@
               <div class="col-lg-4 info">
                 <i class="bi bi-geo-alt"></i>
                 <h4>Location:</h4>
-                <p>A108 Adam Street<br>New York, NY 535022</p>
+                <p><?=$context['company']['address']; ?></p>
               </div>
 
               <div class="col-lg-4 info mt-4 mt-lg-0">
                 <i class="bi bi-envelope"></i>
                 <h4>Email:</h4>
-                <p>info@example.com<br>contact@example.com</p>
+                <p><?=$context['company']['email']; ?></p>
               </div>
 
               <div class="col-lg-4 info mt-4 mt-lg-0">
                 <i class="bi bi-phone"></i>
                 <h4>Call:</h4>
-                <p>+1 5589 55488 51<br>+1 5589 22475 14</p>
+                <p><?=$context['company']['phone']; ?></p>
               </div>
             </div>
           </div>
@@ -55,7 +55,8 @@
 
       <div class="row mt-5 justify-content-center" data-aos="fade-up">
         <div class="col-lg-10">
-          <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+          <form method="post" name="contact-form">
+            <input type="hidden" name="csrf_token" value="<?=$_SESSION['csrf_token']; ?>">
             <div class="row">
               <div class="col-md-6 form-group">
                 <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
@@ -71,11 +72,9 @@
               <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
             </div>
             <div class="my-3">
-              <div class="loading">Loading</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Your message has been sent. Thank you!</div>
+              <div class="message"></div>
             </div>
-            <div class="text-center"><button type="submit">Send Message</button></div>
+            <div class="text-center"><button class="btn btn-danger" type="submit"><span class="btn-text">Send Message</span></button></div>
           </form>
         </div>
 
@@ -85,3 +84,64 @@
   </section><!-- End Contact Section -->
 
 </main><!-- End #main -->
+
+<script>
+    let contactForm = document.forms['contact-form'],
+    contactBtn = document.querySelector('.btn'),
+    url = window.location.href;
+
+
+    contactForm.addEventListener('submit', (e)=> {
+        e.preventDefault()
+
+        let data = {
+            'name': contactForm['name'].value,
+            'email': contactForm['email'].value,
+            'subject': contactForm['subject'].value,
+            'message': contactForm['message'].value,
+            'csrf_token': contactForm['csrf_token'].value,
+        };
+
+        console.log(data);
+
+        // Loading animation
+        let btnText = contactBtn.querySelector('.btn-text');
+        btnText.innerHTML = `Sending...<img width='30px' src="<?=ROOT; ?>/assets/admin/img/spinner-white.svg">`;
+        contactBtn.disabled = true;
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then((response)=>{
+            return response.json()
+        })
+        .then((data)=>{
+            console.log(data);
+            if (data == 'success') {
+                btnText.innerHTML = `Success`;
+                setTimeout(()=>{
+                    if (confirm('Message was successfully sent')) {
+                        contactForm.reset();
+                    }
+                }, 2000)
+            } else {
+                btnText.innerHTML = `Send`;
+                contactBtn.disabled = false;
+                alert("Service not available at the moment");
+            }
+        })
+        .catch((err)=>{
+            console.log(err);
+            btnText.innerHTML = `Send`;
+            contactBtn.disabled = false;
+            alert("Service not available at the moment");
+        })
+
+
+    });
+
+</script>

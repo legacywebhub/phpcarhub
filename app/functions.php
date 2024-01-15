@@ -491,18 +491,23 @@ function fetch_post(int $id) {
 
 // FUNCTION TO SEND MAIL
 function send_mail($from, $to, $subject, $message) {
-    $headers = "From: $from\r\n";
-    $headers .= "Reply-To: $from\r\n";
-    $headers .= "MIME-Version: 1.0\r\n";
-    $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
+    $mail = new PHPMailer(true);
+    try {
+        $mail->setFrom($from);
+        $mail->addAddress($to);
+        $mail->Subject = $subject;
+        $mail->Body = $message;
+        $mail->isHTML(true);
 
-    if (mail($to, $subject, $message, $headers)) {
+        $mail->send();
         return true;
+    } catch (Exception $e) {
+        echo "Error sending email: {$mail->ErrorInfo}";
+        return false;
     }
-    return false;
 }
 
-// FUNCTION TO SEND MAIL USING PHP MAILER
+// FUNCTION TO SEND MAIL USING PHP MAILER AND HTML TEMPLATE
 function sendMail($to, $subject, $email_values = array()) {
 
     // Fetching current site settings for email params

@@ -47,7 +47,7 @@
                     </div>
                     <div class="form-group">
                         <label>Whatsapp Link <span class="text-danger">*</span></label>
-                        <input type="url" name="whatsapp_link" class="form-control"  aria-describedby="whatsappHelpBlock" required>
+                        <input type="url" name="whatsapp_link" class="form-control"  aria-describedby="whatsappHelpBlock">
                         <small id="whatsappHelpBlock" class="form-text text-muted">
                         This must be a link and not whatsapp phone number i.e http://wa.me/0801234567
                         </small>
