@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4>Add Car Category</h4>
+                <h4>Edit Vehicle Category</h4>
             </div>
             <div class="card-body">
                 <?php if (isset($_SESSION['message'])): ?>
@@ -15,8 +15,8 @@
                 <form method="post" enctype="multipart/form-data">
                     <input type="hidden" name="csrf_token" value="<?=$_SESSION['csrf_token']; ?>">  
                     <div class="form-group">
-                        <div class="section-title">Car Category <span class="text-danger">*</span></div>
-                        <input type="text" class="form-control" name="category" maxlength="60" placeholder="I.e Bus, Tricycle, Parts etc" required>
+                        <div class="section-title">Vehicle Category <span class="text-danger">*</span></div>
+                        <input type="text" class="form-control" name="category" maxlength="60" value="<?=$context['category']['category']; ?>" required>
                     </div>
                     <div class="text-left mt-5">
                         <button class="btn btn-lg btn-primary" name="addpostcategory"><span class="btn-text">Submit</span></button>

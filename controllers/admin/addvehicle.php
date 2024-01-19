@@ -5,16 +5,16 @@ $admin = admin_logged_in();
 
 // Other variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
-$title = ucfirst($company['name'])." | Add Car";
-$categories = query_fetch("SELECT * FROM car_categories");
+$title = ucfirst($company['name'])." | Add Vehicle";
+$categories = query_fetch("SELECT * FROM vehicle_categories");
 
 
-// Handling add car request
+// Handling add vehicle request
 if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
 
-    // Car parameters for BB
+    // vehicle parameters for BB
     $data = [
-        'car_id' => generate_unique_id(7),
+        'vehicle_id' => generate_unique_id(7),
         'category_id' => sanitize_input($_POST['category']),
         'name' => sanitize_input($_POST['name']),
         'color' => sanitize_input($_POST['color']),
@@ -26,44 +26,42 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION[
 
     try {
 
-        $query = "INSERT INTO CARS (car_id, category_id, name, color, description, price, available) VALUES (:car_id, :category_id, :name, :color, :description, :price, :available)";
+        $query = "INSERT INTO vehicles (vehicle_id, category_id, name, color, description, price, available) VALUES (:vehicle_id, :category_id, :name, :color, :description, :price, :available)";
         $query = query_db($query, $data);
         
         if (!empty($_FILES['images'])) {
-            // Uploading car images
-            $uploaded_images = handle_multiple_image($_FILES['images'], 'cars');
+            // Uploading vehicle images
+            $uploaded_images = handle_multiple_image($_FILES['images'], 'vehicles');
 
             if ($uploaded_images['status'] == "success" || $uploaded_images['status'] == "partial") {
 
                 // Saving each image to DB
                 foreach ($uploaded_images['images'] as $image) {
-                    $query = "INSERT INTO car_images (car_id, image) VALUES (:car_id, :image)";
-                    $query = query_db($query, ['car_id'=>$data['car_id'], 'image'=>$image]);
+                    $query = "INSERT INTO vehicle_images (vehicle_id, image) VALUES (:vehicle_id, :image)";
+                    $query = query_db($query, ['vehicle_id'=>$data['vehicle_id'], 'image'=>$image]);
                 }
-                $message = "Car and ". $uploaded_images['total_uploaded'] ." image was uploaded successfully";
+                $message = "Vehicle and ". $uploaded_images['total_uploaded'] ." image was uploaded successfully";
                 $message_tag = "success";
-                redirect('cars', $message, $message_tag);
+                redirect('vehicles', $message, $message_tag);
             } else {
-                $message = "Car was uploaded successfully without images";
+                $message = "Vehicle was uploaded successfully without images";
                 $message_tag = "success";
-                redirect('cars', $message, $message_tag);
+                redirect('vehicles', $message, $message_tag);
             }
         }
-        $message = "Car was successfully uploaded";
+        $message = "vehicle was successfully uploaded";
         $message_tag = "success";
-        redirect('cars', $message, $message_tag);
+        redirect('vehicles', $message, $message_tag);
 
     } catch(Exception $error) {
         $message = "Error while saving data: $error";
         $message_tag = "danger";
     }
-    redirect('addcar', $message, $message_tag);
+    redirect('addvehicle', $message, $message_tag);
 }
-
 
 // Generating CSRF Token
 $csrf_token = generate_csrf_token();
-
 
 $context = [
     'company'=> $company,
@@ -72,4 +70,4 @@ $context = [
     'categories'=> $categories
 ];
 
-admin_view('addcar', $context);
+admin_view('addvehicle', $context);

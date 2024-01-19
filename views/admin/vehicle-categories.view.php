@@ -2,7 +2,7 @@
     <div class="col-lg-12 col-md-12 col-12 col-sm-12">
         <div class="card">
             <div class="card-header">
-                <h4>Car Categories  &nbsp;&nbsp;&nbsp;<a href="addcarcategory" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i> Add Category</a></h4>
+                <h4>Vehicle Categories  &nbsp;&nbsp;&nbsp;<a href="addvehiclecategory" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i> Add Category</a></h4>
                 
                 <div class="card-header-form">
                     <form action="" method="get">
@@ -32,21 +32,21 @@
                         <th>Category</th>
                         <th>Actions</th>
                     </tr>
-                    <?php if (empty($context['car_categories']['result'])): ?>
+                    <?php if (empty($context['vehicle_categories']['result'])): ?>
                         <tr>
                             <td>
                             No Categories
                             </td>
                         </tr>
                     <?php else: ?>
-                        <?php foreach($context['car_categories']['result'] as $category): ?>
+                        <?php foreach($context['vehicle_categories']['result'] as $category): ?>
                         <tr class="mt-2" style="margin-top: 10px !important;">
                             <td><?=$category['id']; ?></td>
                             <td><?=$category['category']; ?></td>
                             <td>
                             <?php if($context['admin']['is_superuser'] == 1): ?>
-                                <a href="editcarcategory?id=<?=$category['id']; ?>" class="btn btn-primary btn-action" data-toggle="tooltip" title="Edit" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                                <a href="deletecarcategory?id=<?=$category['id']; ?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-original-title="Delete"><i class="fas fa-trash"></i></a>
+                                <a href="editvehiclecategory?id=<?=$category['id']; ?>" class="btn btn-primary btn-action" data-toggle="tooltip" title="Edit" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="deletevehiclecategory?id=<?=$category['id']; ?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete" data-original-title="Delete"><i class="fas fa-trash"></i></a>
                             <?php else: ?>
                                 <a href="javascript:void(0);" class="btn btn-primary btn-action" data-toggle="tooltip" title="Edit" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
                                 <a href="javascript:void(0);" class="btn btn-danger btn-action " data-toggle="tooltip" title="Delete" data-original-title="Delete"><i class="fas fa-trash"></i></a>
@@ -60,12 +60,12 @@
                 </div>
 
                 <div class="pag-btns">
-                <span style="margin: 0px 10px;">Showing Page <b><?=$context['car_categories']['page'] ?></b> 0f <b><?=$context['car_categories']['num_of_pages'] ?></b></span>
+                <span style="margin: 0px 10px;">Showing Page <b><?=$context['vehicle_categories']['page'] ?></b> 0f <b><?=$context['vehicle_categories']['num_of_pages'] ?></b></span>
                     <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                        <?php if ($context['car_categories']['has_previous']): ?>
+                        <?php if ($context['vehicle_categories']['has_previous']): ?>
                         <li class="page-item">
-                            <a class="page-link" href="?page=<?=$context['car_categories']['previous_page'] ?>" aria-label="Previous">
+                            <a class="page-link" href="?page=<?=$context['vehicle_categories']['previous_page'] ?>" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                             <span class="sr-only">Previous</span>
                             </a>
@@ -79,12 +79,12 @@
                         </li>
                         <?php endif ?>
 
-                        <li class="page-item active"><a class="page-link" href="javascript:void(0)"><?=$context['car_categories']['page'] ?></a></li>
+                        <li class="page-item active"><a class="page-link" href="javascript:void(0)"><?=$context['vehicle_categories']['page'] ?></a></li>
 
 
-                        <?php if ($context['car_categories']['has_next']): ?>
+                        <?php if ($context['vehicle_categories']['has_next']): ?>
                         <li class="page-item">
-                            <a class="page-link" href="?page=<?=$context['car_categories']['next_page'] ?>" aria-label="Next">
+                            <a class="page-link" href="?page=<?=$context['vehicle_categories']['next_page'] ?>" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                             <span class="sr-only">Next</span>
                             </a>
@@ -99,7 +99,7 @@
                         <?php endif ?>
                     </ul>
                     </nav>
-                    <span style="margin: 0px 10px;"><b>Total (<?=$context['car_categories']['total'] ?>)</b></span>
+                    <span style="margin: 0px 10px;"><b>Total (<?=$context['vehicle_categories']['total'] ?>)</b></span>
                 </div>
             </div>
         </div>

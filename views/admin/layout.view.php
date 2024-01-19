@@ -31,7 +31,7 @@
         font-weight: bold;
     }
     input {
-        font-size: 18px !important;
+        font-size: 15px;
         font-weight: bold;
     }
     .table {
@@ -83,8 +83,8 @@
               <a href="<?=ROOT; ?>/admin/edituser?id=<?=$context['admin']['id']; ?>" class="dropdown-item has-icon"> <i class="far fa-user"></i> 
                 Profile
               </a>
-              <a href="<?=ROOT; ?>/admin/cars" class="dropdown-item has-icon"> <i class="fas fa-car"></i>
-                Cars
+              <a href="<?=ROOT; ?>/admin/vehicles" class="dropdown-item has-icon"> <i class="fas fa-car"></i>
+                Vehicles
               </a>
               <a href="<?=ROOT; ?>/admin/settings" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
                 Company Settings
@@ -122,13 +122,13 @@
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="command"></i><span>Cars</span></a>
+              <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="command"></i><span>Vehicles</span></a>
               <ul class="dropdown-menu">
-              <li><a  href="<?=ROOT; ?>/admin/car-categories" class="nav-link">Categories</a></li>
-                <li><a  href="<?=ROOT; ?>/admin/addcarcategory" class="nav-link">Add Category</a></li>
-                <li><a  href="<?=ROOT; ?>/admin/cars" class="nav-link">Cars</a></li>
-                <li><a  href="<?=ROOT; ?>/admin/addcar" class="nav-link">Add Car</a></li>
-                <li><a  href="<?=ROOT; ?>/admin/car-images" class="nav-link">Car Images</a></li>
+              <li><a  href="<?=ROOT; ?>/admin/vehicle-categories" class="nav-link">Categories</a></li>
+                <li><a  href="<?=ROOT; ?>/admin/addvehiclecategory" class="nav-link">Add Category</a></li>
+                <li><a  href="<?=ROOT; ?>/admin/vehicles" class="nav-link">Vehicles</a></li>
+                <li><a  href="<?=ROOT; ?>/admin/addvehicle" class="nav-link">Add Vehicle</a></li>
+                <li><a  href="<?=ROOT; ?>/admin/vehicle-gallery" class="nav-link">Vehicle Gallery</a></li>
               </ul>
             </li>
             <li class="dropdown">

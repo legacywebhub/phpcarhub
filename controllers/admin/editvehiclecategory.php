@@ -11,23 +11,23 @@ if (!isset($_GET['id'])) {
 
     try {
         $id = intval($_GET['id']);
-        $matching_categories = query_fetch("SELECT * FROM car_categories WHERE id = $id LIMIT 1");
+        $matching_categories = query_fetch("SELECT * FROM vehicle_categories WHERE id = $id LIMIT 1");
 
         if (empty($matching_categories)) {
             // Redirect if no matching categories
-            redirect("car-categories");
+            redirect("vehicle-categories");
         } else {
             // Else return category
             $category = $matching_categories[0];
         }
     } catch (Exception) {
-        redirect("car-categories");
+        redirect("vehicle-categories");
     }
 }
 
 // Other variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
-$title = ucfirst($company['name'])." | Edit Car Category";
+$title = ucfirst($company['name'])." | Edit Vehicle Category";
 
 
 // Handling edit post category request
@@ -36,20 +36,20 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION[
     // Declaring DB variables as PHP array
     $data = [
         'id' => intval($category['id']),
-        'category' => sanitize_input($_POST['category'])
+        'category' => strtolower(sanitize_input($_POST['category']))
     ];
 
     try {
-        $query = "UPDATE car_categories SET category = :category WHERE id = :id LIMIT 1";
+        $query = "UPDATE vehicle_categories SET category = :category WHERE id = :id LIMIT 1";
         $query = query_db($query, $data);
         $message = "Category was successfully updated";
         $message_tag = "success";
-        redirect('car-categories', $message, $message_tag);
+        redirect('vehicle-categories', $message, $message_tag);
     } catch(Exception $error) {
         $message = "Error while saving data: $error";
         $message_tag = "danger";
     }
-    redirect('editcarcategory', $message, $message_tag);
+    redirect('editvehiclecategory', $message, $message_tag);
 }
 
 // Generating CSRF Token
@@ -62,4 +62,4 @@ $context = [
     'category'=> $category
 ];
 
-admin_view('editcarcategory', $context);
+admin_view('editvehiclecategory', $context);

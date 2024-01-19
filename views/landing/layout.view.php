@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Flattern Bootstrap Template - Index</title>
+  <title><?=$context['title']; ?></title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -27,6 +27,13 @@
 
   <!-- Template Main CSS File -->
   <link href="<?=ROOT; ?>/assets/landing/css/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <style>
+    /* #breadcrumbs, #hero {
+      padding: 0 !important;
+    } */
+  </style>
 
   <!-- =======================================================
   * Template Name: Flattern - v4.7.0
@@ -59,20 +66,18 @@
     <div class="container d-flex justify-content-between">
 
       <div class="logo">
-        <h1 class="text-light"><a href="<?=ROOT; ?>/home">Flattern</a></h1>
+        <h1 class="text-light"><a href="<?=ROOT; ?>/home"><?=strtoupper($context['company']['name']); ?></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="<?=ROOT; ?>/home"><img src="<?=ROOT; ?>/assets/landing/img/logo.png" alt="" class="img-fluid"></a>-->
+        <!-- <a href="home"><img src="ROOT/assets/landing/img/logo.png" alt="" class="img-fluid"></a> -->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="active" href="<?=ROOT; ?>/home">Home</a></li>
           <li><a href="<?=ROOT; ?>/about">About</a></li>
-          <li><a href="<?=ROOT; ?>/services">Services</a></li>
-          <li><a href="<?=ROOT; ?>/testimonials">Testimonials</a></li>
-          <li><a href="<?=ROOT; ?>/portfolio">Portfolio</a></li>
+          <li><a href="<?=ROOT; ?>/products">Catalogue</a></li>
           <li><a href="<?=ROOT; ?>/blog">Blog</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+          <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
               <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
@@ -88,7 +93,7 @@
               <li><a href="#">Drop Down 3</a></li>
               <li><a href="#">Drop Down 4</a></li>
             </ul>
-          </li>
+          </li> -->
           <li><a href="<?=ROOT; ?>/contact">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -146,7 +151,7 @@
 
   <div class="me-md-auto text-center text-md-start">
     <div class="copyright">
-      &copy; Copyright <strong><span>Flattern</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span><?=strtoupper($context['company']['name']); ?></span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->

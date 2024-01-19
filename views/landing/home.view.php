@@ -26,7 +26,7 @@
   color: #dc3545;
 }
 
-.car-img {
+.vehicle-img {
   width: 100%;
   height: 250px;
 }
@@ -200,26 +200,26 @@
         <div class="col-lg-12 d-flex justify-content-center">
           <ul id="portfolio-flters">
             <li data-filter="*" class="filter-active">All</li>
-            <?php foreach($context['car_categories'] as $car_category): ?>
-            <li data-filter=".filter-<?=$car_category['category']; ?>"><?=$car_category['category']; ?></li>
+            <?php foreach($context['vehicle_categories'] as $vehicle_category): ?>
+            <li data-filter=".filter-<?=$vehicle_category['category']; ?>"><?=$vehicle_category['category']; ?></li>
             <?php endforeach ?>
           </ul>
         </div>
       </div>
 
       <div class="row portfolio-container" data-aos="fade-up">
-        <?php foreach($context['cars'] as $car): ?>
+        <?php foreach($context['vehicles'] as $vehicle): ?>
           <?php 
-            $car_id = $car['car_id'];
-            $car_image = query_fetch("SELECT * FROM car_images WHERE car_id = '$car_id' LIMIT 1")[0];
+            $vehicle_id = $vehicle['vehicle_id'];
+            $vehicle_image = query_fetch("SELECT * FROM vehicle_images WHERE vehicle_id = '$vehicle_id' LIMIT 1")[0];
           ?>
-        <div class="col-lg-4 col-md-6 col-sm-12 my-4 portfolio-item filter-<?=fetch_car_category($car['category_id']); ?>">
-          <img src="<?=fetch_image($car_image['image'], 'cars'); ?>" class="car-img" alt="">
+        <div class="col-lg-4 col-md-6 col-sm-12 my-4 portfolio-item filter-<?=fetch_vehicle_category($vehicle['category_id']); ?>">
+          <img src="<?=fetch_image($vehicle_image['image'], 'vehicles'); ?>" class="vehicle-img" alt="">
           <div class="portfolio-info">
-            <h4><?=$car['name']; ?></h4>
-            <p>N<?=$car['price']; ?></p>
-            <a href="<?=fetch_image($car_image['image'], 'cars'); ?>" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="<?=$car['name']; ?>"><i class="bx bx-plus"></i></a>
-            <a href="portfolio-details.html" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            <h4><?=$vehicle['name']; ?></h4>
+            <p>N<?=$vehicle['price']; ?></p>
+            <a href="<?=fetch_image($vehicle_image['image'], 'vehicles'); ?>" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="<?=$car['name']; ?>"><i class="bx bx-plus"></i></a>
+            <a href="product?vehicle_id=<?=$vehicle['vehicle_id']; ?>" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
           </div>
         </div>
         <?php endforeach ?>
@@ -229,18 +229,192 @@
     </div>
   </section><!-- End Portfolio Section -->
 
-  <!-- ======= Brands Section ======= -->
-  <section class="brands">
+  <!-- ======= Testimonials Section ======= -->
+  <section id="testimonials" class="testimonials">
     <div class="container">
       <div class="section-title" data-aos="fade-up">
-        <h2>Popular car <strong>Brands</strong></h2>
-        <p>More than just cars, we're fueled by the vibrant community of individuals who make our autohub a second home. City savviness, family adventures, weekend escapes, eco-conscious drives, and second-chance seekers—we celebrate the unique stories and dreams behind every wheel</p>
+        <h2><strong>Testimonials</strong></h2>
+        <p>Here's what our customers say about us</p>
       </div>
+
+      <div class="row">
+
+        <div class="col-lg-6" data-aos="fade-up">
+          <div class="testimonial-item">
+            <img src="<?=ROOT; ?>/assets/landing/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+            <h3>Saul Goodman</h3>
+            <h4>Ceo &amp; Founder</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="testimonial-item mt-4 mt-lg-0">
+            <img src="<?=ROOT; ?>/assets/landing/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+            <h3>Sara Wilsson</h3>
+            <h4>Designer</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="testimonial-item mt-4">
+            <img src="<?=ROOT; ?>/assets/landing/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+            <h3>Jena Karlis</h3>
+            <h4>Store Owner</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="testimonial-item mt-4">
+            <img src="<?=ROOT; ?>/assets/landing/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+            <h3>Matt Brandon</h3>
+            <h4>Freelancer</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="testimonial-item mt-4">
+            <img src="<?=ROOT; ?>/assets/landing/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+            <h3>John Larson</h3>
+            <h4>Entrepreneur</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="500">
+          <div class="testimonial-item mt-4">
+            <img src="<?=ROOT; ?>/assets/landing/img/testimonials/testimonials-6.jpg" class="testimonial-img" alt="">
+            <h3>Emily Harison</h3>
+            <h4>Store Owner</h4>
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Eius ipsam praesentium dolor quaerat inventore rerum odio. Quos laudantium adipisci eius. Accusamus qui iste cupiditate sed temporibus est aspernatur. Sequi officiis ea et quia quidem.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section><!-- End Testimonials Section -->
+
+  <!-- ======= Brands Section ======= -->
+  <section class="contact">
+    <div class="container">
+      <div class="section-title" data-aos="fade-up">
+        <h2>Book an appointment with us <strong>Today</strong></h2>
     </div>
 
-    <div class="brand-container">
-      <img src="<?=ROOT; ?>/assets/landing/img/clients/brands-1.jpg" alt="">
+    <div class="row mt-5 justify-content-center" data-aos="fade-up">
+      <div class="col-lg-10">
+        <form method="post" name="contact-form">
+          <input type="hidden" name="csrf_token" value="<?=$_SESSION['csrf_token']; ?>">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+            </div>
+            <div class="col-md-6 form-group mt-3 mt-md-0">
+              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+            </div>
+          </div>
+          <div class="form-group mt-3">
+            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+          </div>
+          <div class="form-group mt-3">
+            <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+          </div>
+          <div class="my-3">
+            <div class="message"></div>
+          </div>
+          <div class="text-center"><button class="btn btn-danger" type="submit"><span class="btn-text">Send Message</span></button></div>
+        </form>
+      </div>
     </div>
   </section><!-- End Brands Section -->
 
 </main><!-- End #main -->
+
+<script>
+    let contactForm = document.forms['contact-form'],
+    contactBtn = document.querySelector('.btn'),
+    url = window.location.href;
+
+
+    contactForm.addEventListener('submit', (e)=> {
+        e.preventDefault()
+
+        let data = {
+            'name': contactForm['name'].value,
+            'email': contactForm['email'].value,
+            'subject': contactForm['subject'].value,
+            'message': contactForm['message'].value,
+            'csrf_token': contactForm['csrf_token'].value,
+        };
+
+        console.log(data);
+
+        // Loading animation
+        let btnText = contactBtn.querySelector('.btn-text');
+        btnText.innerHTML = `Sending...<img width='30px' src="<?=ROOT; ?>/assets/admin/img/spinner-white.svg">`;
+        contactBtn.disabled = true;
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then((response)=>{
+            return response.json()
+        })
+        .then((data)=>{
+            console.log(data);
+            if (data == 'success') {
+                btnText.innerHTML = `Success`;
+                setTimeout(()=>{
+                    if (confirm('Message was successfully sent')) {
+                        contactForm.reset();
+                    }
+                }, 2000)
+            } else {
+                btnText.innerHTML = `Send`;
+                contactBtn.disabled = false;
+                alert("Service not available at the moment");
+            }
+        })
+        .catch((err)=>{
+            console.log(err);
+            btnText.innerHTML = `Send`;
+            contactBtn.disabled = false;
+            alert("Service not available at the moment");
+        })
+
+
+    });
+
+</script>

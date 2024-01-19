@@ -445,9 +445,9 @@ function fetchUser(int $id) {
     return "No User";
 }
 
-// FUNCTION TO FETCH CAR CATEGORIES USING THEIR IDS
-function fetch_car_category(int $id) {
-    $matched_categories = query_fetch("SELECT * FROM car_categories WHERE id = $id LIMIT 1");
+// FUNCTION TO FETCH VEHICLE CATEGORIES USING THEIR IDS
+function fetch_vehicle_category(int $id) {
+    $matched_categories = query_fetch("SELECT * FROM vehicle_categories WHERE id = $id LIMIT 1");
 
     if (!empty($matched_categories)) {
         return $matched_categories[0]['category'];
@@ -508,15 +508,18 @@ function send_mail($from, $to, $subject, $message) {
 }
 
 // FUNCTION TO SEND MAIL USING PHP MAILER AND HTML TEMPLATE
-function sendMail($to, $subject, $email_values = array()) {
+function sendMail($from, $to, $subject, $email_values = array()) {
 
-    // Fetching current site settings for email params
-    $setting = query_fetch("SELECT * FROM settings ORDER BY id DESC LIMIT 1")[0];
+    // Default $email_values array
+    //$email_values = ['name'=> "", 'message'=> ""];
+
+    // Fetching company settings for email params
+    $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
     // Appending to our passed in array
     $email_values += [
-        'site_name'=> ucfirst($setting['name']),
-        'site_domain'=> ucfirst($setting['domain']),
-        'site_email'=> $setting['email'],
+        'site_name'=> ucfirst($company['name']),
+        'site_domain'=> ucfirst($company['domain']),
+        'site_email'=> $company['email'],
     ];
 
     //Create an instance; passing `true` enables exceptions
@@ -534,7 +537,7 @@ function sendMail($to, $subject, $email_values = array()) {
         $mail->Port = EMAIL_PORT; // Update with your SMTP server port; 587 for gmail
 
         // Set the sender and recipient
-        $mail->setFrom($setting['email'], ucfirst($setting['name'])); // Update with your email and name
+        $mail->setFrom($from); // Update with your email and name
         $mail->addAddress($to);
 
         //Attachments

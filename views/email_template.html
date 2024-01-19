@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
   <meta name='viewport' content='width=320, initial-scale=1' />
-  <title>{{company.site_domain}}</title>
+  <title>{{site_domain}}</title>
   <style type='text/css'>
 
     /* ----- Client Fixes ----- */
@@ -174,11 +174,7 @@
             <table class='full-width-gmail-android' cellspacing='0' cellpadding='0' border='0' width='100%'>
               <tr>
                 <td class='header center' width='100%'>
-                  {% if company.name %}
-                  <h3>{{company.name}}</h3>
-                  {% else %}
-                  <h3>{{company.site_domain}}</h3>
-                  {% endif %}
+                  <h3>{{site_name}}</h3>
                 </td>
               </tr>
             </table>
@@ -195,18 +191,14 @@
                 <td class='body-padding mobile-padding'>
 
                 <table cellpadding='0' cellspacing='0' width='100%'>
-                  <tr>
+                  <!-- <tr>
                     <td style='text-align:center; font-size:20px;'>
-                      {% if name %}
-                      <h4 class="text-capitalize">Greetings <span >{{name}}</span>,</h4>
-                      {% else %}
-                      <h4 class="text-capitalize">{{subject|title}}</h4>
-                      {% endif %}
+                      <h4 class="text-capitalize">{{subject}}</h4>
                     </td>
-                  </tr>
+                  </tr> -->
                   <tr>
                     <td style='padding-bottom:20px;'>
-                     {{message|safe}}
+                     {{message}}
                       <br><br>
                     </td>
                   </tr>
@@ -221,7 +213,7 @@
                   <tr>
                     <td style='padding-top:5px; vertical-align:top;'>
                      * Never give your login access to anyone<br>
-                     * Contact our support at <a href='MailTo:{{company.email}}'>{{company.email}} </a> if you need any assistance
+                     * Contact our support at <a href='MailTo:{{site_email}}'>{{site_email}} </a> if you need any assistance
                     </td>
                   </tr>
                 </table><br>
@@ -230,14 +222,14 @@
                 <table cellspacing='0' cellpadding='0' width='100%'>
                   <tr>
                     <td style='text-align:left;'>
-                      <b>Enjoy your journey {{user.first_name}}</b><br>
+                      <b>Enjoy your journey</b><br>
                       This is an automated message, do not reply.
                     </td>
                   </tr>
                   
                   <tr>
                     <td style='padding-top:10px;'>
-                      <hr><p style="text-align: center;"><i>Powered by {{company.name}} - &copy;2018</i></p>
+                      <hr><p style="text-align: center;"><i>Powered by {{site_name}} - &copy;2024</i></p>
                     </td>
                   </tr>
                 </table>

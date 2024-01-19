@@ -109,8 +109,8 @@ function create_tables() {
     $statement = $con->prepare($query);
     $statement->execute();
 
-    // Car category table
-    $query = "create table if not exists car_categories(
+    // Vehicle category table
+    $query = "create table if not exists vehicle_categories(
 
         id int primary key auto_increment,
         category varchar(100) not null,
@@ -122,10 +122,10 @@ function create_tables() {
     $statement = $con->prepare($query);
     $statement->execute();
 
-    $query = "create table if not exists cars(
+    $query = "create table if not exists vehicles(
 
         id int primary key auto_increment,
-        car_id varchar(12) not null,
+        vehicle_id varchar(12) not null,
         category_id int not null,
         name varchar(60) not null,
         color varchar(60) null,
@@ -134,17 +134,17 @@ function create_tables() {
         available tinyint default 0,
         date_uploaded datetime default current_timestamp,
 
-        key name (car_id),
-        unique (car_id)
+        key name (vehicle_id),
+        unique (vehicle_id)
     )";
     $statement = $con->prepare($query);
     $statement->execute();
 
-    // Car images table  
-    $query = "create table if not exists car_images(
+    // Vehicle images table  
+    $query = "create table if not exists vehicle_images(
 
         id int primary key auto_increment,
-        car_id varchar(12) not null,
+        vehicle_id varchar(12) not null,
         image varchar(1050) not null
         
     )";

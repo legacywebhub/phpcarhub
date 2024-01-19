@@ -5,10 +5,10 @@
     <div class="container">
 
       <div class="d-flex justify-content-between align-items-center">
-        <h2>Portfolio Details</h2>
+        <h2>Vehicle Details</h2>
         <ol>
-          <li><a href="index.html">Home</a></li>
-          <li>Portfolio Details</li>
+          <li><a href="home">Home</a></li>
+          <li>Details</li>
         </ol>
       </div>
 
@@ -24,38 +24,36 @@
         <div class="col-lg-8">
           <div class="portfolio-details-slider swiper">
             <div class="swiper-wrapper align-items-center">
+            <?php 
+              $vehicle_id = $context['vehicle']['vehicle_id'];
+              $vehicle_images = query_fetch("SELECT * FROM vehicle_images WHERE vehicle_id = '$vehicle_id'");
+            ?>
 
+            <?php foreach($vehicle_images as $vehicle_image): ?>
               <div class="swiper-slide">
-                <img src="assets/img/portfolio/portfolio-1.jpg" alt="">
+                <img src="<?=fetch_image($vehicle_image['image'], 'vehicles'); ?>" alt="">
               </div>
-
-              <div class="swiper-slide">
-                <img src="assets/img/portfolio/portfolio-2.jpg" alt="">
-              </div>
-
-              <div class="swiper-slide">
-                <img src="assets/img/portfolio/portfolio-3.jpg" alt="">
-              </div>
-
+            <?php endforeach ?>
             </div>
+
             <div class="swiper-pagination"></div>
           </div>
         </div>
 
         <div class="col-lg-4">
           <div class="portfolio-info">
-            <h3>Project information</h3>
+            <h3>Product information</h3>
             <ul>
-              <li><strong>Category</strong>: Web design</li>
-              <li><strong>Client</strong>: ASU Company</li>
-              <li><strong>Project date</strong>: 01 March, 2020</li>
-              <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+              <li><strong>Title</strong>: <?=$context['vehicle']['name']; ?></li>
+              <li><strong>Price</strong>: N<?=$context['vehicle']['price']; ?></li>
+              <li><strong>Date uploaded</strong>: <?=$context['vehicle']['date_uploaded']; ?></li>
+              <li><strong>Available</strong>: <?php if ($context['vehicle']['available']==1){echo "Yes";}else{echo "No";} ?></li>
             </ul>
           </div>
           <div class="portfolio-description">
-            <h2>This is an example of portfolio detail</h2>
+            <h2>Product Features & Description</h2>
             <p>
-              Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+              <?=$context['vehicle']['description']; ?>
             </p>
           </div>
         </div>
