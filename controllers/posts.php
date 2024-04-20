@@ -3,7 +3,7 @@
 // Validating view
 if (isset($_GET['category'])) {
     // Checking if category exists
-    $category = $_GET['category'];
+    $category = strtolower(sanitize_input($_GET['category']));
     $matching_categories = query_fetch("SELECT * FROM post_categories WHERE category = '$category'");
 
     if (empty($matching_categories)) {

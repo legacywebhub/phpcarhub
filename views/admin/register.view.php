@@ -30,7 +30,7 @@
               </div>
               <div class="card-body">
                 <?php if (isset($_SESSION['message'])): ?>
-                  <p class="text-center text-<?=$_SESSION['message_tag']; ?>"><?=$_SESSION['message']; ?></p>
+                  <p class="my-2 text-center text-<?=$_SESSION['message_tag']; ?>"><?=$_SESSION['message']; ?></p>
                 <?php endif ?>
                 <form method="POST" action="">
                   <div class="row">

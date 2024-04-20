@@ -21,7 +21,7 @@ if (!isset($_GET['title'])) {
     $post = $posts[0];
     $author = query_fetch("SELECT * FROM users WHERE id = ".$post['user_id']." LIMIT 1")[0] ?? null;
 
-    // Handling edit post request
+    // Handling post comment request
     if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
 
         // Declaring DB variables as PHP array

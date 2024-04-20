@@ -10,6 +10,7 @@
                     <?=$_SESSION['message']; ?>
                 </h6>
             <?php endif ?>
+            
             <ul class="list-unstyled list-unstyled-border list-unstyled-noborder">
             <?php if (empty($context['messages']['result'])): ?>
                 <li class="media" style="font-size: 16px;">No Messages</li>

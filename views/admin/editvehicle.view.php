@@ -6,12 +6,11 @@
         </div>
         <div class="card-body">
         <?php if (isset($_SESSION['message'])): ?>
-            <div class="form-group">
-                <h6 class="col-12 text-<?=$_SESSION['message_tag']; ?>" style="display: flex; justify-content: center;">
-                    <?=$_SESSION['message']; ?>
-                </h6>
-            </div>
+            <h6 class="col-12 my-2 text-<?=$_SESSION['message_tag']; ?>" style="display: flex; justify-content: center;">
+                <?=$_SESSION['message']; ?>
+            </h6>
         <?php endif ?>
+        
         <form action="" method="post" enctype="multipart/form-data">
             <input type="hidden" name="csrf_token" value="<?=$_SESSION['csrf_token']; ?>">
             <div class="image-container my-3 text-center">

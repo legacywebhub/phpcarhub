@@ -6,18 +6,17 @@
             </div>
             <div class="card-body">
                 <?php if (isset($_SESSION['message'])): ?>
-                <div class="form-group">
-                    <h6 class="col-12 text-<?=$_SESSION['message_tag']; ?>" style="display: flex; justify-content: center;">
+                    <h6 class="col-12 my-2 text-<?=$_SESSION['message_tag']; ?>" style="display: flex; justify-content: center;">
                         <?=$_SESSION['message']; ?>
                     </h6>
-                </div>
                 <?php endif ?>
+                
                 <form method="post" enctype="multipart/form-data">
                     <input type="hidden" name="csrf_token" value="<?=$_SESSION['csrf_token']; ?>">
                     <div class="form-group">
                         <div class="section-title">Profile Picture</div>
                         <img class="image-preview-edit my-3" src="<?=fetch_image($context['this_user']['profile_pic'], 'users'); ?>" width="150">
-                        <input type="file" onchange="displayImageEdit(this.files[0]);" name="profile_pic" class="form-control">
+                        <input type="file" onchange="previewImage(this.files[0]);" name="profile_pic" class="form-control">
                     </div>
                     <script>
                         let displayImageEdit = (file) => {

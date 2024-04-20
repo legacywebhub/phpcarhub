@@ -129,9 +129,10 @@
       <div class="col-lg-4 col-md-6 footer-newsletter">
         <h4>Join Our Newsletter</h4>
         <p>Get updates on our newest vehicles and accessories, offers and discounts!</p>
-        <form action="" method="post">
-          <input type="email" name="email"><input type="submit" value="Subscribe">
+        <form class="newsletter-form" method="post">
+          <input type="email" name="email" maxlength="100" required><button class="btn btn-danger newsletter-btn"><span class="btn-text">Subscribe</span></button>
         </form>
+        <div class="newsletter-msg mt-1 text-success"></div>
       </div>
 
     </div>
@@ -177,6 +178,30 @@
 <!-- Template Main JS File -->
 <script src="<?=STATIC_ROOT; ?>/landing/js/main.js"></script>
 
+<script>
+  let newsLetterForm = document.querySelector('.newsletter-form'),
+  newsletterMsg = document.querySelector('.newsletter-msg'),
+  newsLetterBtn = newsLetterForm.querySelector('.newsletter-btn'),
+  btnText2 = newsLetterBtn.querySelector('.btn-text');
+
+  newsLetterForm.addEventListener('submit', (e)=> {
+      e.preventDefault();
+
+      // Loading animation
+      btnText2.innerHTML = `<img width='20px' src="<?=STATIC_ROOT; ?>/admin/img/spinner-white.svg">`;
+      newsLetterBtn.disabled = true;
+
+      setTimeout(()=>{
+        newsLetterForm.reset();
+        btnText2.innerHTML = `Subscribe`;
+        newsLetterBtn.disabled = false;
+        newsletterMsg.innerText = "Subscribed successfully";
+        setTimeout(()=>{
+          newsletterMsg.innerText = "";
+        }, 5000)
+      }, 1500)
+  })
+</script>
 </body>
 
 </html>

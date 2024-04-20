@@ -6,7 +6,7 @@ $admin = admin_logged_in();
 // Authorizing view
 if (!isset($_GET['id'])) {
     // Redirect if no category id passed
-    redirect("post-categories");
+    redirect("vehicle-categories");
 } else {
 
     try {

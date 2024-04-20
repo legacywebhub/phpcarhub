@@ -61,8 +61,7 @@
     <div class="container">
 
       <div class="section-title" data-aos="fade-up">
-        <h2>Some <strong>Features</strong> we do provide</h2>
-        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        <h2><strong>Services</strong> we offer</h2>
       </div>
 
       <div class="row">
@@ -70,26 +69,26 @@
           <ul class="nav nav-tabs flex-column">
             <li class="nav-item">
               <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">
-                <h4>Modi sit est</h4>
-                <p>Quis excepturi porro totam sint earum quo nulla perspiciatis eius.</p>
+                <h4>We offer a wide variety of different types of cars and vehicles.</h4>
+                <p>"Unlock a world of automotive possibilities at our dealership. From sleek sports cars that blur the lines between road and racetrack, to rugged SUVs ready to conquer any terrain, to eco-friendly electric vehicles paving the way towards a sustainable future - we offer an unparalleled selection tailored to every driving passion. Elevate your journey and experience the thrill of the open road with a vehicle as exceptional as you are. Visit us today and embark on an unforgettable adventure behind the wheel."</p>
               </a>
             </li>
             <li class="nav-item mt-2">
               <a class="nav-link" data-bs-toggle="tab" href="#tab-2">
-                <h4>Unde praesentium sed</h4>
-                <p>Voluptas vel esse repudiandae quo excepturi.</p>
+                <h4>We provide versatile vehicle rental and lease-to-own programs</h4>
+                <p>Freedom awaits with our flexible vehicle rental and lease options. Upgrade your driving adventures through short-term rentals - perfect for road trips, moving, or simply enjoying a new set of wheels. Or embrace long-term mobility by leasing your dream car. Our lease-to-own plans make vehicle ownership an affordable reality. Take control of your journey and experience automotive excellence on your terms.</p>
               </a>
             </li>
             <li class="nav-item mt-2">
               <a class="nav-link" data-bs-toggle="tab" href="#tab-3">
-                <h4>Pariatur explicabo vel</h4>
-                <p>Velit veniam ipsa sit nihil blanditiis mollitia natus.</p>
+                <h4>We sell replacement parts and components for vehicles.</h4>
+                <p>Keep your automotive companion running like new with our premium selection of spare parts. From essential engine components to cutting-edge tech upgrades, our inventory covers every need to breathe new life into your vehicle. Expertly crafted with uncompromising quality, our parts ensure peak performance and longevity for your prized possession. Experience the thrill of the open road again by outfitting your ride with our top-tier spare parts today.</p>
               </a>
             </li>
             <li class="nav-item mt-2">
               <a class="nav-link" data-bs-toggle="tab" href="#tab-4">
-                <h4>Nostrum qui quasi</h4>
-                <p>Ratione hic sapiente nostrum doloremque illum nulla praesentium id</p>
+                <h4>We provide consulting services related to automobiles.</h4>
+                <p>Unlock automotive mastery with our expert consultation services. Whether you're a passionate enthusiast seeking to elevate your knowledge or a business professional navigating the industry's complexities, our seasoned consultants illuminate the path forward. Drawing from years of immersive experience, they offer tailored guidance encompassing everything from vehicle selection and maintenance to regulatory compliance and market trends. Tap into a wellspring of wisdom and let our consultative prowess propel your automotive journey to new heights of understanding and success.</p>
               </a>
             </li>
           </ul>
@@ -123,7 +122,8 @@
     </div>
   </section><!-- End Features Section -->
   
-  <!-- ======= Our Team Section ======= -->
+  
+  <!--
   <section id="team" class="team section-bg">
     <div class="container">
 
@@ -209,75 +209,9 @@
       </div>
 
     </div>
-  </section><!-- End Our Team Section -->
+  </section>
 
-  <!-- ======= Our Skills Section ======= -->
-  <section id="skills" class="skills">
-    <div class="container">
 
-      <div class="section-title" data-aos="fade-up">
-        <h2>Our <strong>Skills</strong></h2>
-        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-      </div>
-
-      <div class="row skills-content">
-
-        <div class="col-lg-6" data-aos="fade-up">
-
-          <div class="progress">
-            <span class="skill">HTML <i class="val">100%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-
-          <div class="progress">
-            <span class="skill">CSS <i class="val">90%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-
-          <div class="progress">
-            <span class="skill">JavaScript <i class="val">75%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-
-          <div class="progress">
-            <span class="skill">PHP <i class="val">80%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-
-          <div class="progress">
-            <span class="skill">WordPress/CMS <i class="val">90%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-
-          <div class="progress">
-            <span class="skill">Photoshop <i class="val">55%</i></span>
-            <div class="progress-bar-wrap">
-              <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-  </section><!-- End Our Skills Section -->
-
-  <!-- ======= Our Clients Section ======= -->
   <section id="clients" class="clients">
     <div class="container">
 
@@ -339,6 +273,6 @@
       </div>
 
     </div>
-  </section><!-- End Our Clients Section -->
+  </section> -->
 
 </main><!-- End #main -->

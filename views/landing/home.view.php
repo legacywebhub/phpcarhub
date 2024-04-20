@@ -229,7 +229,7 @@
     </div>
   </section><!-- End Portfolio Section -->
 
-  <!-- ======= Testimonials Section ======= -->
+  <!-- Testimonial section
   <section id="testimonials" class="testimonials">
     <div class="container">
       <div class="section-title" data-aos="fade-up">
@@ -291,36 +291,10 @@
           </div>
         </div>
 
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
-          <div class="testimonial-item mt-4">
-            <img src="<?=ROOT; ?>/assets/landing/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-            <h3>John Larson</h3>
-            <h4>Entrepreneur</h4>
-            <p>
-              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
-              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-          </div>
-        </div>
-
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="500">
-          <div class="testimonial-item mt-4">
-            <img src="<?=ROOT; ?>/assets/landing/img/testimonials/testimonials-6.jpg" class="testimonial-img" alt="">
-            <h3>Emily Harison</h3>
-            <h4>Store Owner</h4>
-            <p>
-              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              Eius ipsam praesentium dolor quaerat inventore rerum odio. Quos laudantium adipisci eius. Accusamus qui iste cupiditate sed temporibus est aspernatur. Sequi officiis ea et quia quidem.
-              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-          </div>
-        </div>
-
       </div>
 
     </div>
-  </section><!-- End Testimonials Section -->
+  </section>End Testimonials Section -->
 
   <!-- ======= Brands Section ======= -->
   <section class="contact">
