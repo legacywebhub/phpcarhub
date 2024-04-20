@@ -10,30 +10,23 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="<?=ROOT; ?>/assets/landing/img/favicon.png" rel="icon">
-  <link href="<?=ROOT; ?>/assets/landing/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="<?=STATIC_ROOT; ?>/landing/img/favicon.png" rel="icon">
+  <link href="<?=STATIC_ROOT; ?>/landing/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Muli:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="<?=ROOT; ?>/assets/landing/vendor/animate.css/animate.min.css" rel="stylesheet">
-  <link href="<?=ROOT; ?>/assets/landing/vendor/aos/aos.css" rel="stylesheet">
-  <link href="<?=ROOT; ?>/assets/landing/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="<?=ROOT; ?>/assets/landing/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="<?=ROOT; ?>/assets/landing/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="<?=ROOT; ?>/assets/landing/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="<?=ROOT; ?>/assets/landing/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="<?=STATIC_ROOT; ?>/landing/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="<?=STATIC_ROOT; ?>/landing/vendor/aos/aos.css" rel="stylesheet">
+  <link href="<?=STATIC_ROOT; ?>/landing/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?=STATIC_ROOT; ?>/landing/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="<?=STATIC_ROOT; ?>/landing/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="<?=STATIC_ROOT; ?>/landing/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="<?=STATIC_ROOT; ?>/landing/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="<?=ROOT; ?>/assets/landing/css/style.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <style>
-    /* #breadcrumbs, #hero {
-      padding: 0 !important;
-    } */
-  </style>
+  <link href="<?=STATIC_ROOT; ?>/landing/css/style.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Flattern - v4.7.0
@@ -49,7 +42,7 @@
   <section id="topbar" class="d-flex align-items-center">
     <div class="container d-flex justify-content-center justify-content-md-between">
       <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com"><?=$context['company']['email']; ?></a></i>
+        <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:<?=$context['company']['email']; ?>"><?=$context['company']['email']; ?></a></i>
         <i class="bi bi-phone d-flex align-items-center ms-4"><span><?=$context['company']['phone']; ?></span></i>
       </div>
       <div class="social-links d-none d-md-flex align-items-center">
@@ -66,17 +59,17 @@
     <div class="container d-flex justify-content-between">
 
       <div class="logo">
-        <h1 class="text-light"><a href="<?=ROOT; ?>/home"><?=strtoupper($context['company']['name']); ?></a></h1>
+        <a href="home"><img src="<?=STATIC_ROOT; ?>/landing/img/logo-dark.png" class="img-fluid" alt="<?=$context['company']['name']; ?>"></a>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="home"><img src="ROOT/assets/landing/img/logo.png" alt="" class="img-fluid"></a> -->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="active" href="<?=ROOT; ?>/home">Home</a></li>
-          <li><a href="<?=ROOT; ?>/about">About</a></li>
-          <li><a href="<?=ROOT; ?>/products">Catalogue</a></li>
-          <li><a href="<?=ROOT; ?>/blog">Blog</a></li>
+          <li><a class="active" href="home">Home</a></li>
+          <li><a href="about">About</a></li>
+          <li><a href="products">Catalogue</a></li>
+          <li><a href="blog">Blog</a></li>
           <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
@@ -94,7 +87,7 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li> -->
-          <li><a href="<?=ROOT; ?>/contact">Contact</a></li>
+          <li><a href="contact">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -102,11 +95,9 @@
     </div>
 </header><!-- End Header -->
 
-<section>
-    <!-- Content Goes Here -->
-    <?php require("$name.view.php"); ?>
-    <!-- End Content -->
-</section>
+  <!-- Content Goes Here -->
+  <?php require("$name.view.php"); ?>
+  <!-- End Content -->
 
 <!-- ======= Footer ======= -->
 <footer id="footer">
@@ -116,7 +107,7 @@
     <div class="row">
 
       <div class="col-lg-4 col-md-6 footer-contact">
-        <h3><?=$context['company']['name']; ?></h3>
+      <a href="home"><img src="<?=STATIC_ROOT; ?>/landing/img/logo-light.png" class="img-fluid" width="200px" alt="<?=$context['company']['name']; ?>"></a>
         <p>
           <?=$context['company']['address']; ?><br><br>
           <strong>Phone:</strong> <?=$context['company']['phone']; ?><br>
@@ -127,8 +118,8 @@
       <div class="col-lg-4 col-md-6 footer-links">
         <h4>Useful Links</h4>
         <ul>
-          <li><i class="bx bx-chevron-right"></i> <a href="<?=ROOT; ?>/home">Home</a></li>
-          <li><i class="bx bx-chevron-right"></i> <a href="<?=ROOT; ?>/about">About us</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="home">Home</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="about">About us</a></li>
           <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
           <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
           <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
@@ -158,7 +149,7 @@
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
       <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/flattern-multipurpose-bootstrap-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
     </div>
   </div>
   <div class="social-links text-center text-md-right pt-3 pt-md-0">
@@ -174,16 +165,17 @@
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
-<script src="<?=ROOT; ?>/assets/landing/vendor/aos/aos.js"></script>
-<script src="<?=ROOT; ?>/assets/landing/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="<?=ROOT; ?>/assets/landing/vendor/glightbox/js/glightbox.min.js"></script>
-<script src="<?=ROOT; ?>/assets/landing/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-<script src="<?=ROOT; ?>/assets/landing/vendor/swiper/swiper-bundle.min.js"></script>
-<script src="<?=ROOT; ?>/assets/landing/vendor/waypoints/noframework.waypoints.js"></script>
-<script src="<?=ROOT; ?>/assets/landing/vendor/php-email-form/validate.js"></script>
-
+<script src="<?=STATIC_ROOT; ?>/landing/vendor/aos/aos.js"></script>
+<script src="<?=STATIC_ROOT; ?>/landing/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?=STATIC_ROOT; ?>/landing/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="<?=STATIC_ROOT; ?>/landing/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="<?=STATIC_ROOT; ?>/landing/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="<?=STATIC_ROOT; ?>/landing/vendor/waypoints/noframework.waypoints.js"></script>
+<script src="<?=STATIC_ROOT; ?>/landing/vendor/php-email-form/validate.js"></script>
+<!-- Libraries Files -->
+<script src="<?=STATIC_ROOT; ?>/landing/libraries/sweetalert.min.js"></script>
 <!-- Template Main JS File -->
-<script src="<?=ROOT; ?>/assets/landing/js/main.js"></script>
+<script src="<?=STATIC_ROOT; ?>/landing/js/main.js"></script>
 
 </body>
 

@@ -1,19 +1,15 @@
 <?php
-
-require("./app/init.php");
-
 $company = query_fetch("SELECT * FROM company LIMIT 1")[0]
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 
 <!-- errors-404.html  21 Nov 2019 04:05:02 GMT -->
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title><?=ucfirst($company['name']); ?> | 404 Page</title>
+  <title><?=ucwords($company['name']); ?> | 404</title>
   <!-- General CSS Files -->
   <link rel="stylesheet" href="<?=ROOT; ?>/assets/admin/css/app.min.css">
   <!-- Template CSS -->
@@ -36,26 +32,9 @@ $company = query_fetch("SELECT * FROM company LIMIT 1")[0]
               The page you were looking for could not be found.
             </div>
             <div class="page-search">
-              <form>
-                <div class="form-group floating-addon floating-addon-not-append">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <i class="fas fa-search"></i>
-                      </div>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Search">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary btn-lg">
-                        Search
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </form>
-              <!-- <div class="mt-3">
-                <a href="#">Back to Home</a>
-              </div> -->
+              <div class="mt-3">
+                <a class="btn btn-primary btn-bg text-light" onclick="goBack()">Go Back</a>
+              </div>
             </div>
           </div>
         </div>
@@ -70,6 +49,18 @@ $company = query_fetch("SELECT * FROM company LIMIT 1")[0]
   <script src="<?=ROOT; ?>/assets/admin/js/scripts.js"></script>
   <!-- Custom JS File -->
   <script src="<?=ROOT; ?>/assets/admin/js/custom.js"></script>
+
+  <script>
+    function goBack() {
+      // Check if the referring page is not the current page itself to avoid redirecting to the same page
+      if (document.referrer !== window.location.href) {
+        window.history.back();
+      } else {
+        // If the referring page is the same as the current page, simply redirect to a desired page
+        window.location.href = '<?=ROOT; ?>/home';
+      }
+    }
+  </script>
 </body>
 
 

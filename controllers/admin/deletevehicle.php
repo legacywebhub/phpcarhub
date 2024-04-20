@@ -14,9 +14,9 @@ $id = intval($_GET['id']);
 $matched_vehicles = query_fetch("SELECT * FROM vehicles WHERE id = $id LIMIT 1");
 
 if (!empty($matched_vehicles)) {
-    $vehicle = $matched_vehicles[0];
+    $vehicle_image = $matched_vehicles[0]['image'];
     // Attempting to delete previous vehicle images
-    $filename = MEDIA_PATH . $vehicle['image'];
+    $filename = MEDIA_PATH . "vehicles/$vehicle_image";
     if (file_exists($filename)) {
         // Deleting image associated to vehicle
         unlink($filename);

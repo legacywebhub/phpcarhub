@@ -21,7 +21,7 @@ if (!isset($_GET['id'])) {
 }
 // Other variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
-$title = ucfirst($company['name'])." | Edit User";
+$title = ucwords($company['name'])." | Edit User";
 
 // Handling edit user request
 if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION['csrf_token']) {

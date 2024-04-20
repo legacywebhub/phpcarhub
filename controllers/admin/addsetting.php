@@ -5,7 +5,7 @@ $admin = admin_logged_in();
 
 // Other variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
-$title = ucfirst($company['name'])." | Add Setting";
+$title = ucwords($company['name'])." | Add Setting";
 
 
 // Handling add setting request
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION[
     } else {
         // Otherwise
         try {
-            $upload_image = handle_image($_FILES['logo']);
+            $upload_image = handle_image($_FILES['logo'], 'company');
 
             if ($upload_image['status'] == "success") {
                 $data['logo'] = $upload_image['new_file_name'];

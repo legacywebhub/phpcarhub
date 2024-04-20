@@ -2,7 +2,7 @@
 
 // Variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
-$title = ucfirst($company['name'])." | Contact us";
+$title = ucwords($company['name'])." | Contact us";
 
 // Handling incoming AJAX request
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -13,11 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Checking for csrf attack
     if ($data['csrf_token'] != $_SESSION['csrf_token']) {
         // Send response as JSON
-        echo json_encode("failed");
+        echo json_encode(['status'=> "failed", 'message'=>"Invalid request"]);
         die();
     }
     // Process data here
-    $input_data = [
+    $data = [
         'name'=> sanitize_input($data['name']),
         'email'=> sanitize_input($data['email']),
         'subject'=> sanitize_input($data['subject']),
@@ -25,11 +25,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ];
     try {
         $sql = "INSERT INTO messages (name, email, subject, message) VALUES (:name, :email, :subject, :message)";
-        $query = query_db($sql, $input_data);
-        send_mail($input_data['email'], $company['email'], $input_data['subject'], $input_data['message']);
-        $response = "success";
-    } catch(Exception $e) {
-        $response = "failed: $e";
+        $query = query_db($sql, $data);
+        // Notifying admin via email
+        sendMail($data['email'], $company['email'], "Message from your website", ['name'=> $data['name'], 'message'=> $data['message']]);
+        $response = ['status'=> "success", 'message'=>"Message received successfully"];
+    } catch(Exception) {
+        $response = ['status'=> "failed", 'message'=>"Error please check your network connection"];
     }
     // Send response as JSON
     echo json_encode($response);

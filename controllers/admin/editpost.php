@@ -27,7 +27,7 @@ if (!isset($_GET['id'])) {
 
 // Other variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
-$title = ucfirst($company['name'])." | Edit Post";
+$title = ucwords($company['name'])." | Edit Post";
 $categories = query_fetch("SELECT * FROM post_categories");
 
 

@@ -2,7 +2,7 @@
 
 // Variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
-$title = ucfirst($company['name'])." | About us";
+$title = ucwords($company['name'])." | About us";
 
 $context = [
     'company'=> $company,

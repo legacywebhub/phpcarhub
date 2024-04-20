@@ -19,7 +19,7 @@ if (!isset($_GET['id'])) {
 
 // Other variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
-$title = ucfirst($company['name'])." | Edit Setting";
+$title = ucwords($company['name'])." | Edit Setting";
 
 // Handling incoming post request
 if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
@@ -72,11 +72,11 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST" && $_POST['csrf_token'] === $_SESSION[
     } else {
         try {
             // Validate and process logo image
-            $upload_image = handle_image($_FILES['logo']);
+            $upload_image = handle_image($_FILES['logo'], 'company');
 
             if ($upload_image['status'] == "success") {
                 // Delete previous logo image
-                $previous_logo = MEDIA_ROOT . $setting['logo'];
+                $previous_logo = MEDIA_PATH . 'company/'. $setting['logo'];
                 if (file_exists($previous_logo)) {
                     unlink($previous_logo);
                 }

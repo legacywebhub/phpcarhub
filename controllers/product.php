@@ -2,7 +2,7 @@
 
 // Variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
-$title = ucfirst($company['name'])." | Product";
+$title = ucwords($company['name'])." | Product";
 
 // Authorizing view
 if (!isset($_GET['vehicle_id'])) {

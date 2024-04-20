@@ -5,7 +5,7 @@ $admin = admin_logged_in();
 
 // Other variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
-$title = ucfirst($company['name'])." | Add Vehicle Category";
+$title = ucwords($company['name'])." | Add Vehicle Category";
 
 
 // Handling add post category request

@@ -2,7 +2,7 @@
 
 // Variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
-$title = ucfirst($company['name'])." | Register";
+$title = ucwords($company['name'])." | Register";
 
 // Handling register request
 if ($_SERVER["REQUEST_METHOD"]  == "POST" && isset($_POST['register'])) {

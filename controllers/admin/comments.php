@@ -5,7 +5,7 @@ $admin = admin_logged_in();
 
 // Other variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
-$title = ucfirst($company['name'])." | Comments";
+$title = ucwords($company['name'])." | Comments";
 
 // Checking for search in get request
 if (isset($_GET['search'])) {

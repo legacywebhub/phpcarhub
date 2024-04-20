@@ -23,7 +23,7 @@ if (!isset($_GET['id'])) {
 
 // Other variables
 $company = query_fetch("SELECT * FROM company ORDER BY id DESC LIMIT 1")[0];
-$title = ucfirst($company['name'])." | Edit Vehicle";
+$title = ucwords($company['name'])." | Edit Vehicle";
 $categories = query_fetch("SELECT * FROM vehicle_categories");
 
 // Handling edit vehicle request

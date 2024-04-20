@@ -86,62 +86,53 @@
 </main><!-- End #main -->
 
 <script>
-    let contactForm = document.forms['contact-form'],
-    contactBtn = document.querySelector('.btn'),
-    url = window.location.href;
+  let contactForm = document.forms['contact-form'],
+  contactBtn = document.querySelector('.btn'),
+  btnText = contactBtn.querySelector('.btn-text'),
+  url = window.location.href;
 
+  contactForm.addEventListener('submit', (e)=> {
+    e.preventDefault()
 
-    contactForm.addEventListener('submit', (e)=> {
-        e.preventDefault()
+    // Loading animation
+    btnText.innerHTML = `Sending...<img width='30px' src="<?=STATIC_ROOT; ?>/admin/img/spinner-white.svg">`;
+    contactBtn.disabled = true;
 
-        let data = {
-            'name': contactForm['name'].value,
-            'email': contactForm['email'].value,
-            'subject': contactForm['subject'].value,
-            'message': contactForm['message'].value,
-            'csrf_token': contactForm['csrf_token'].value,
-        };
+    fetch(url, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        'name': contactForm['name'].value,
+        'email': contactForm['email'].value,
+        'subject': contactForm['subject'].value,
+        'message': contactForm['message'].value,
+        'csrf_token': contactForm['csrf_token'].value
+      })
+    })
+    .then((response)=>{
+      return response.json();
+    })
+    .then((data)=>{
+      console.log(data);
+      if (data['status'] == 'success') {
+        contactForm.reset();
+        contactBtn.disabled = false;
+        btnText.innerHTML = `Send Message`;
+        swal(data['message'], {icon: 'success'});
+      } else {
+        btnText.innerHTML = `Send Message`;
+        contactBtn.disabled = false;
+        swal(data['message'], {icon: 'error'});
+      }
+    })
+    .catch((err)=>{
+      console.log(err);
+      btnText.innerHTML = `Send Message`;
+      contactBtn.disabled = false;
+      swal("Error please check network connection", {icon: 'error'});
+    })
 
-        console.log(data);
-
-        // Loading animation
-        let btnText = contactBtn.querySelector('.btn-text');
-        btnText.innerHTML = `Sending...<img width='30px' src="<?=ROOT; ?>/assets/admin/img/spinner-white.svg">`;
-        contactBtn.disabled = true;
-
-        fetch(url, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-        .then((response)=>{
-            return response.json()
-        })
-        .then((data)=>{
-            console.log(data);
-            if (data == 'success') {
-                btnText.innerHTML = `Success`;
-                setTimeout(()=>{
-                    if (confirm('Message was successfully sent')) {
-                        contactForm.reset();
-                    }
-                }, 2000)
-            } else {
-                btnText.innerHTML = `Send`;
-                contactBtn.disabled = false;
-                alert("Service not available at the moment");
-            }
-        })
-        .catch((err)=>{
-            console.log(err);
-            btnText.innerHTML = `Send`;
-            contactBtn.disabled = false;
-            alert("Service not available at the moment");
-        })
-
-
-    });
-
+  });
 </script>

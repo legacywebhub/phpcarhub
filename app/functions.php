@@ -226,7 +226,7 @@ function generate_unique_id($length = 10) {
 }
 
 // FUNCTION TO VALIDATE AND UPLOAD IMAGES
-function handle_image($file, string $folder = '') {
+function handle_image(Array $file, string $folder) {
     $file_name = $file['name'];
     $file_tmp_name = $file['tmp_name'];
     $file_size = $file['size'];
@@ -256,7 +256,7 @@ function handle_image($file, string $folder = '') {
                 // Generating a new unique name and appending to the file extension
                 $new_file_name = uniqid("IMG-", true).'.'.$file_extension;
                 // Defining the upload path
-                $image_upload_path = MEDIA_PATH . '/' .  $folder . '/' . $new_file_name;
+                $image_upload_path = MEDIA_PATH . "$folder/$new_file_name";
                 // Moving uploaded file to defined upload path
                 move_uploaded_file($file_tmp_name, $image_upload_path);
                 // Giving positive feedback or response
@@ -299,7 +299,7 @@ function organise_files($files) {
 }
 
 // FUNCTION TO VALIDATE AND UPLOAD IMAGES
-function handle_multiple_image($files, string $folder = '') {
+function handle_multiple_image(Array $files, string $folder) {
     // Reorganising files
     $files = organise_files($files);
     // Number of files passed
@@ -331,7 +331,7 @@ function handle_multiple_image($files, string $folder = '') {
                 // Generating a new unique name and appending to the file extension
                 $new_file_name = uniqid("IMG-", true).'.'.$file_extension;
                 // Defining the upload path
-                $image_upload_path = MEDIA_PATH . '/' . $folder . '/' . $new_file_name;
+                $image_upload_path = MEDIA_PATH . "$folder/$new_file_name";
                 // Moving uploaded file to defined upload path
                 move_uploaded_file($file_tmp_name, $image_upload_path);
                 // Adding new file to uploaded file list
@@ -417,7 +417,7 @@ function paginate(string $query, int $results_per_page) {
 
 // FUNCTION TO FETCH IMAGE
 function fetch_image($image, $folder) {
-    if ($image == null || !file_exists(APP_PATH . "media/$folder/$image")) {
+    if ($image == null || !file_exists(MEDIA_PATH . "$folder/$image")) {
         // If file does not exist or null
         return STATIC_ROOT . "/no_image.png";
     } else {
@@ -440,9 +440,9 @@ function fetchUser(int $id) {
     $matched_users = query_fetch("SELECT * FROM users WHERE id = $id LIMIT 1");
 
     if (!empty($matched_users)) {
-        return $matched_users[0]['fullname'];
+        return $matched_users[0];
     }
-    return "No User";
+    return ['profile_pic'=> "-", 'fullname'=> "-", 'username'=> "-", 'email'=> "-"];
 }
 
 // FUNCTION TO FETCH VEHICLE CATEGORIES USING THEIR IDS

@@ -5,6 +5,11 @@
             <h4>Messages</h4>
         </div>
         <div class="card-body">
+            <?php if (isset($_SESSION['message'])): ?>
+                <h6 class="col-12 my-2 text-<?=$_SESSION['message_tag']; ?>" style="display: flex; justify-content: center;">
+                    <?=$_SESSION['message']; ?>
+                </h6>
+            <?php endif ?>
             <ul class="list-unstyled list-unstyled-border list-unstyled-noborder">
             <?php if (empty($context['messages']['result'])): ?>
                 <li class="media" style="font-size: 16px;">No Messages</li>
@@ -75,3 +80,42 @@
     </div>
     </div>
 </div>
+
+
+<script>
+    let messageList = document.querySelectorAll('.media'),
+    deleteBtns = document.querySelectorAll('.delete-btn');
+
+    for (i=0; i < deleteBtns.length; i++) {
+
+        deleteBtns[i].addEventListener('click', function(){
+            let messageId = this.dataset.id;
+            
+            fetch(window.location.href, {
+                method: "POST",
+                mode: "same-origin",
+                credentials: "same-origin",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': "application/json"
+                },
+                body: JSON.stringify({'id':messageId})
+            })
+            .then((response)=>{
+                return response.json();
+            })
+            .then((data)=>{
+                console.log(data);
+                if (data == "success") {
+                    this.parentElement.parentElement.parentElement.innerHTML = "";
+                } else {
+                    alert("Unknown error occured");
+                }
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+
+        });
+    }
+</script>

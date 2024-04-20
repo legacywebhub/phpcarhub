@@ -8,40 +8,39 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title><?= $context['title']; ?></title>
   <!-- General CSS Files -->
-  <link rel="stylesheet" href="<?=ROOT; ?>/assets/admin/css/app.min.css">
-  <link rel="stylesheet" href="<?=ROOT; ?>/assets/admin/css/app.min.css">
+  <link rel="stylesheet" href="<?=STATIC_ROOT; ?>/admin/css/app.min.css">
   <!-- Libraries -->
-  <link rel="stylesheet" href="<?=ROOT; ?>/assets/admin/bundles/summernote/summernote-bs4.css">
-  <link rel="stylesheet" href="<?=ROOT; ?>/assets/admin/bundles/jquery-selectric/selectric.css">
-  <link rel="stylesheet" href="<?=ROOT; ?>/assets/admin/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+  <link rel="stylesheet" href="<?=STATIC_ROOT; ?>/admin/bundles/summernote/summernote-bs4.css">
+  <link rel="stylesheet" href="<?=STATIC_ROOT; ?>/admin/bundles/jquery-selectric/selectric.css">
+  <link rel="stylesheet" href="<?=STATIC_ROOT; ?>/admin/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
   <!-- Template CSS -->
-  <link rel="stylesheet" href="<?=ROOT; ?>/assets/admin/css/style.css">
-  <link rel="stylesheet" href="<?=ROOT; ?>/assets/admin/css/components.css">
+  <link rel="stylesheet" href="<?=STATIC_ROOT; ?>/admin/css/style.css">
+  <link rel="stylesheet" href="<?=STATIC_ROOT; ?>/admin/css/components.css">
   <!-- Custom style CSS -->
-  <link rel="stylesheet" href="<?=ROOT; ?>/assets/admin/css/custom.css">
-  <link rel='shortcut icon' type='image/x-icon' href="<?=ROOT; ?>/assets/admin/img/favicon.ico" />
+  <link rel="stylesheet" href="<?=STATIC_ROOT; ?>/admin/css/custom.css">
+  <link rel='shortcut icon' type='image/x-icon' href="<?=STATIC_ROOT; ?>/landing/img/favicon.png" />
   <!-- Inline style CSS -->
   <style>
     .form-check {
-        display: inline-block;
-        margin-right: 30px;
+      display: inline-block;
+      margin-right: 30px;
     }
     .form-check label {
-        font-size: 18px;
-        font-weight: bold;
+      font-size: 18px;
+      font-weight: bold;
     }
     input {
-        font-size: 15px;
-        font-weight: bold;
+      font-size: 15px;
+      font-weight: bold;
     }
     .table {
         font-size: 15px;
     }
     .pag-btns {
-        margin: 30px 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      margin: 30px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .image-preview {
       width: 100px;
@@ -74,23 +73,26 @@
             <?php if (!empty($context['user']['profile_pic'])): ?>
               <img alt="image" src="<?=fetch_image($context['admin']['profile_pic'], 'users'); ?>" class="user-img-radious-style">
             <?php else: ?>
-              <img alt="image" src="<?=ROOT; ?>/assets/admin/img/default.png" class="user-img-radious-style">
+              <img alt="image" src="<?=STATIC_ROOT; ?>/admin/img/default.png" class="user-img-radious-style">
             <?php endif ?>
             <span class="d-sm-none d-lg-inline-block"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
               <div class="dropdown-title">WELCOME <?=$context['admin']['username']; ?></div>
-              <a href="<?=ROOT; ?>/admin/edituser?id=<?=$context['admin']['id']; ?>" class="dropdown-item has-icon"> <i class="far fa-user"></i> 
+              <a href="edituser?id=<?=$context['admin']['id']; ?>" class="dropdown-item has-icon"> <i class="far fa-user"></i> 
                 Profile
               </a>
-              <a href="<?=ROOT; ?>/admin/vehicles" class="dropdown-item has-icon"> <i class="fas fa-car"></i>
+              <a href="vehicles" class="dropdown-item has-icon"> <i class="fas fa-car"></i>
                 Vehicles
               </a>
-              <a href="<?=ROOT; ?>/admin/settings" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>
-                Company Settings
+              <a href="posts" class="dropdown-item has-icon"> <i class="fas fa-edit"></i>
+                Posts
+              </a>
+              <a href="messages" class="dropdown-item has-icon"> <i class="fas fa-envelope"></i>
+                Messages
               </a>
               <div class="dropdown-divider"></div>
-              <a href="<?=ROOT; ?>/admin/logout" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
+              <a href="logout" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
                 Logout
               </a>
             </div>
@@ -100,56 +102,55 @@
       <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="<?=ROOT; ?>/admin/dashboard">
+            <a href="dashboard">
             <?php if (!empty($context['company']['logo'])): ?>
-              <img alt="image" src="<?=fetch_image($context['company']['logo'], 'users'); ?>" class="header-logo" />
+              <img alt="image" src="<?=fetch_image($context['company']['logo'], 'company'); ?>" class="header-logo" alt="<?=strtoupper($context['company']['name']); ?>" />
             <?php else: ?>
-              <img alt="image" src="<?=ROOT; ?>/assets/admin/img/logo.png" class="header-logo" />
+              <img alt="image" src="<?=STATIC_ROOT; ?>/landing/img/logo-dark.png" class="header-logo" alt="<?=strtoupper($context['company']['name']); ?>" />
             <?php endif ?>
-            <span class="logo-name"><?=strtoupper($context['company']['name']); ?></span>
             </a>
           </div>
           <ul class="sidebar-menu">
             <li class="menu-header">Menu</li>
             <li class="dropdown active">
-              <a href="<?=ROOT; ?>/admin/dashboard" class="nav-link"><i data-feather="grid"></i><span>Dashboard</span></a>
+              <a href="dashboard" class="nav-link"><i data-feather="grid"></i><span>Dashboard</span></a>
             </li>
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="user"></i><span>Users</span></a>
               <ul class="dropdown-menu">
-                <li><a  href="<?=ROOT; ?>/admin/users" class="nav-link">Users</a></li>
-                <li><a  href="<?=ROOT; ?>/admin/adduser" class="nav-link">Add Users</a></li>
+                <li><a  href="users" class="nav-link">Users</a></li>
+                <li><a  href="adduser" class="nav-link">Add Users</a></li>
               </ul>
             </li>
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="command"></i><span>Vehicles</span></a>
               <ul class="dropdown-menu">
-              <li><a  href="<?=ROOT; ?>/admin/vehicle-categories" class="nav-link">Categories</a></li>
-                <li><a  href="<?=ROOT; ?>/admin/addvehiclecategory" class="nav-link">Add Category</a></li>
-                <li><a  href="<?=ROOT; ?>/admin/vehicles" class="nav-link">Vehicles</a></li>
-                <li><a  href="<?=ROOT; ?>/admin/addvehicle" class="nav-link">Add Vehicle</a></li>
-                <li><a  href="<?=ROOT; ?>/admin/vehicle-gallery" class="nav-link">Vehicle Gallery</a></li>
+              <li><a  href="vehicle-categories" class="nav-link">Categories</a></li>
+                <li><a  href="addvehiclecategory" class="nav-link">Add Category</a></li>
+                <li><a  href="vehicles" class="nav-link">Vehicles</a></li>
+                <li><a  href="addvehicle" class="nav-link">Add Vehicle</a></li>
+                <li><a  href="vehicle-gallery" class="nav-link">Vehicle Gallery</a></li>
               </ul>
             </li>
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="file-text"></i><span>Blog</span></a>
               <ul class="dropdown-menu">
-                <li><a  href="<?=ROOT; ?>/admin/post-categories" class="nav-link">Categories</a></li>
-                <li><a  href="<?=ROOT; ?>/admin/addpostcategory" class="nav-link">Add Category</a></li>
-                <li><a  href="<?=ROOT; ?>/admin/posts" class="nav-link">Posts</a></li>
-                <li><a  href="<?=ROOT; ?>/admin/addpost" class="nav-link">Add Post</a></li>
-                <li><a  href="<?=ROOT; ?>/admin/comments" class="nav-link">Comments</a></li>
+                <li><a  href="post-categories" class="nav-link">Categories</a></li>
+                <li><a  href="addpostcategory" class="nav-link">Add Category</a></li>
+                <li><a  href="posts" class="nav-link">Posts</a></li>
+                <li><a  href="addpost" class="nav-link">Add Post</a></li>
+                <li><a  href="comments" class="nav-link">Comments</a></li>
               </ul>
             </li>
             <li class="menu-header">Others</li>
             <li class="dropdown">
-              <a href="<?=ROOT; ?>/admin/settings" class="nav-link"><i data-feather="settings"></i><span>Settings</span></a>
+              <a href="settings" class="nav-link"><i data-feather="settings"></i><span>Settings</span></a>
             </li>
             <li class="dropdown">
-              <a href="<?=ROOT; ?>/admin/messages" class="nav-link"><i data-feather="mail"></i><span>Messages</span></a>
+              <a href="messages" class="nav-link"><i data-feather="mail"></i><span>Messages</span></a>
             </li>
             <li class="dropdown">
-              <a href="<?=ROOT; ?>/admin/logout" class="nav-link"><i data-feather="log-out"></i><span>Logout</span></a>
+              <a href="logout" class="nav-link"><i data-feather="log-out"></i><span>Logout</span></a>
             </li>
           </ul>
         </aside>
@@ -265,20 +266,20 @@
   </div>
 
     <!-- General JS Scripts -->
-    <script src="<?=ROOT; ?>/assets/admin/js/app.min.js"></script>
+    <script src="<?=STATIC_ROOT; ?>/admin/js/app.min.js"></script>
     <!-- JS Libraies -->
-    <script src="<?=ROOT; ?>/assets/admin/bundles/summernote/summernote-bs4.js"></script>
-    <script src="<?=ROOT; ?>/assets/admin/bundles/upload-preview/jquery.uploadPreview.min.js"></script>
-    <script src="<?=ROOT; ?>/assets/admin/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
-    <script src="<?=ROOT; ?>/assets/admin/bundles/jquery-selectric/jquery.selectric.min.js"></script>
+    <script src="<?=STATIC_ROOT; ?>/admin/bundles/summernote/summernote-bs4.js"></script>
+    <script src="<?=STATIC_ROOT; ?>/admin/bundles/upload-preview/jquery.uploadPreview.min.js"></script>
+    <script src="<?=STATIC_ROOT; ?>/admin/bundles/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+    <script src="<?=STATIC_ROOT; ?>/admin/bundles/jquery-selectric/jquery.selectric.min.js"></script>
     <!-- Page Specific JS File -->
-    <script src="<?=ROOT; ?>/assets/admin/js/page/create-post.js"></script>
+    <script src="<?=STATIC_ROOT; ?>/admin/js/page/create-post.js"></script>
     <!-- Page Specific JS File -->
-    <script src="<?=ROOT; ?>/assets/admin/js/page/index.js"></script>
+    <script src="<?=STATIC_ROOT; ?>/admin/js/page/index.js"></script>
     <!-- Template JS File -->
-    <script src="<?=ROOT; ?>/assets/admin/js/scripts.js"></script>
+    <script src="<?=STATIC_ROOT; ?>/admin/js/scripts.js"></script>
     <!-- Custom JS File -->
-    <script src="<?=ROOT; ?>/assets/admin/js/custom.js"></script>
+    <script src="<?=STATIC_ROOT; ?>/admin/js/custom.js"></script>
     <!-- Inline script -->
     <script>
       // This function previews single uploaded images from file input
@@ -296,15 +297,15 @@
 
         // Loop through each selected file and create a preview
         for (const file of files) {
-            // Create a new image element
-            let imageElement = document.createElement('img');
-            imageElement.classList.add('image-preview');
+          // Create a new image element
+          let imageElement = document.createElement('img');
+          imageElement.classList.add('image-preview');
 
-            // Set the source of the image element to the URL of the selected file
-            imageElement.src = URL.createObjectURL(file);
+          // Set the source of the image element to the URL of the selected file
+          imageElement.src = URL.createObjectURL(file);
 
-            // Append the image element to the container
-            imageContainer.appendChild(imageElement);
+          // Append the image element to the container
+          imageContainer.appendChild(imageElement);
         }
       };
 

@@ -8,6 +8,8 @@ env.bak/
 venv.bak/
 
 # Others
-media/
+media/users/
+media/vehicles/
+media/company/
 todo.txt
 test.php

@@ -16,7 +16,7 @@ $matched_users = query_fetch("SELECT * FROM users WHERE id = $id LIMIT 1");
 if (!empty($matched_users)) {
     $user = $matched_users[0];
     // Attempting to delete previous user image
-    $filename = MEDIA_PATH . $user['image'];
+    $filename = MEDIA_PATH . 'users/' . $user['image'];
     if (file_exists($filename)) {
         // Deleting image associated to user
         unlink($filename);
