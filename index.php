@@ -17,9 +17,9 @@ if (count($url) == 1) {
     $page_name = trim($url[0]);
 
     if ($url[0] == '') {
-        $file_name = APP_PATH . "controllers/home.php";
+        $file_name = APP_PATH . "controllers/landing/home.php";
     } else {
-        $file_name = APP_PATH . "controllers/$page_name.php";
+        $file_name = APP_PATH . "controllers/landing/$page_name.php";
     }
 } else if (count($url) == 2 && $url[0] == 'admin') {
     // Assume it's the dashboard if not given
@@ -37,6 +37,3 @@ if (file_exists($file_name)) {
 } else {
     require_once(APP_PATH . "404.php");
 }
-
-// Unset message after view has loaded
-unset_message();

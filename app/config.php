@@ -43,12 +43,12 @@ if ($_SERVER["SERVER_NAME"]  == "localhost") {
 
     // DATABASE PARAMETERS FOR PRODUCTION/LIVE
     define('DBHOST', "localhost");
-    define('DBNAME', "blockbal_domain_db");
-    define('DBUSER', "blockbal_user");
-    define('DBPASS', "p@ssword123");
+    define('DBNAME', "carhub_db");
+    define('DBUSER', "carhub_user");
+    define('DBPASS', "password");
 
     // HTML BASE PATHS
-    define('ROOT', "https://domain.com");
+    define('ROOT', "https://carhub.com");
     define('MEDIA_ROOT', ROOT . '/media');
     define('STATIC_ROOT', ROOT . '/assets');
 
@@ -67,7 +67,7 @@ ini_set('session.use_only_cookies', 1);
 ini_set('session.use_strict_mode', 1);
 
 session_set_cookie_params([
-    'lifetime'=> 10800,     // Session cookie lifetime in seconds before being destroyed (3 Hours)
+    'lifetime'=> 3 * 60 * 60,     // Session cookie lifetime in seconds before being destroyed (3 Hours)
     'domain'=> DOMAIN,     // Change this to the proper domain name in production i.e example.com
     'path'=> '/',     // Allow any path inside our website
     'secure'=> false,     // Change this to "true" in production while using SSL (Https)
@@ -88,7 +88,7 @@ if (!isset($_SESSION['last_regeneration'])) {
 
 } else {
     // Amount of time in seconds to check
-    $interval = 60 * 180; // Every 3 Hours
+    $interval = 3 * 60 * 60; // Every 3 Hours
 
     // Checking if current time has reached or exceeded the interval
     // time that we want to regenerate to a new version

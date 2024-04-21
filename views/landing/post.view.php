@@ -85,14 +85,14 @@
                 <a href="javascript:void(0);"><i class="biu bi-instagram"></i></a>
               </div>
               <p>
-                Hello, My name is <?=$context['author']['fullname'] ?? "Emmanuel Sunday"; ?> and an automobile enthusiast and also a major stakeholder for Adex Carshop.  I talk about cars and automobiles generally so feel free to drop and share your ideas on this platform.
+                Hello, My name is <?=$context['author']['fullname'] ?? "Emmanuel Sunday"; ?> and I'm an automobile enthusiast and also a major stakeholder for Adex Carshop.  I talk about cars and automobiles generally so feel free to drop and share your ideas on this platform.
               </p>
             </div>
           </div><!-- End blog author bio -->
 
           <div class="blog-comments">
 
-            <h4 class="comments-count"><?=post_comments_total($context['post']['id']); ?> Comments</h4>
+            <h4 class="comments-count"><span id="comments-count"><?=post_comments_total($context['post']['id']) ?? 0; ?></span> Comments</h4>
 
             <?php 
               $post_id  = intval($context['post']['id']);
@@ -222,7 +222,9 @@
 </main><!-- End #main -->
 
 <script>
-  let commentsDiv = document.querySelector('.comments-div');
+  let totalComments = parseInt(<?=post_comments_total($context['post']['id']) ?? 0; ?>),
+  commentsCount = document.querySelector('#comments-count'),
+  commentsDiv = document.querySelector('.comments-div'),
   commentForm = document.forms['comment-form'],
   commentBtn = document.querySelector('.btn'),
   btnText = commentBtn.querySelector('.btn-text');
@@ -269,6 +271,9 @@
             </div>
           `;
           commentsDiv.append(commentDiv);
+          // Updating total comments
+          totalComments += 1;
+          commentsCount.textContent = totalComments;
         } else {
           btnText.innerHTML = `Post Comment`;
           commentBtn.disabled = false;

@@ -159,15 +159,15 @@ function username_exists($param) {
 function landing_view($name, $context=[]) {
     // Note that other included file path inside of
     // this layout view is relative to this file path 
-    require(APP_PATH . "views/landing/layout.view.php");
+    require(VIEW_PATH . "landing/layout.view.php");
     unset_message();
 }
 
-// ADMIN VIEW FUNCTION
-function dashboard_view($name, $context=[]) {
+// ADMIN AUTH VIEW FUNCTION
+function auth_view($name, $context=[]) {
     // Note that other included file path inside of
     // this layout view is relative to this file path 
-    require(APP_PATH . "views/dashboard/layout.view.php");
+    require(VIEW_PATH . "admin/auth/layout.view.php");
     unset_message();
 }
 
@@ -175,7 +175,7 @@ function dashboard_view($name, $context=[]) {
 function admin_view($name, $context=[]) {
     // Note that other included file path inside of
     // this layout view is relative to this file path 
-    require(APP_PATH . "views/admin/layout.view.php");
+    require(VIEW_PATH . "admin/layout.view.php");
     unset_message();
 }
 
@@ -200,6 +200,12 @@ function redirect($page, $message='', $message_tag='info') {
     $_SESSION['message'] = $message;
     $_SESSION['message_tag'] = $message_tag;
     header("Location: $page");
+    die();
+}
+
+// FUNCTION TO RETURN JSON RESPONSES
+function return_json($response) {
+    echo json_encode($response);
     die();
 }
 
@@ -589,23 +595,6 @@ function check_new(string $date) {
         return true;
     }
     return false;
-}
-
-// FUNCTION TO DELETE OLD USER NOTIFICATIONS
-function delete_old_notifications(int $user_id) {
-    $notifications = query_fetch("SELECT * FROM notifications WHERE user_id = $user_id");
-    $now = new DateTime('now', new DateTimeZone('UTC'));
-    $today = $now->getTimestamp();
-
-    foreach($notifications as $notification) {
-        $notification_date = strtotime($notification['date']);
-        $days_after_creation = floor(($today - $notification_date) / (60*60*24));
-
-        if ($days_after_creation > 3) {
-            $sql = "DELETE FROM notifications WHERE id = :id";
-            query_db($sql, ['id'=> $notification['id']]);
-        }
-    }
 }
 
 // FUNCTION TO TRUNCATE WORDS TO CERTAIN LIMIT

@@ -102,9 +102,14 @@ function create_tables() {
         is_staff tinyint default 0,
         is_superuser tinyint default 0, 
         is_blocked tinyint default 0,
+        token_hash varchar(255) null,
+        token_expires datetime null,
 
         key email (email),
-        key username (username)
+        key username (username),
+        unique (username),
+        unique (email),
+        unique (token_hash)
     )";
     $statement = $con->prepare($query);
     $statement->execute();

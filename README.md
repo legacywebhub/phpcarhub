@@ -38,3 +38,4 @@ This is an automobile management system built with Javascript, AJAX and PHP that
 ![BLOG2](assets/screenshots/blog2.png)<hr/>
 ![CONTACT](assets/screenshots/contact.png)<hr/>
 ![ADMIN_VEHICLES](assets/screenshots/admin_vehicles.png)<hr/>
+![ADMIN_VEHICLE_GALLERY](assets/screenshots/admin_vehicle_gallery.png)<hr/>

@@ -42,6 +42,4 @@ $context = [
 ];
 
 
-include(APP_PATH . "views/admin/login.view.php");
-
-unset_message();
+auth_view('login', $context);

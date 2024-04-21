@@ -112,7 +112,7 @@
                   <?php if($recent_post['image']): ?>
                     <img src="<?=$recent_post['image']; ?>" width="100px" alt="image">
                   <?php else: ?>
-                    <img src="<?=ROOT; ?>/assets/post_default.jpeg" width="100px" alt="image">
+                    <img src="<?=STATIC_ROOT; ?>/post_default.jpeg" width="100px" alt="image">
                   <?php endif ?>
                   <h4><a href="post?title=<?=$recent_post['slug']; ?>"><?=$recent_post['title']; ?></a></h4>
                   <time><?=format_datetime($recent_post['created_at']); ?></time>

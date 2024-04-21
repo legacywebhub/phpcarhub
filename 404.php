@@ -17,7 +17,7 @@ $company = query_fetch("SELECT * FROM company LIMIT 1")[0]
   <link rel="stylesheet" href="<?=ROOT; ?>/assets/admin/css/components.css">
   <!-- Custom style CSS -->
   <link rel="stylesheet" href="<?=ROOT; ?>/assets/admin/css/custom.css">
-  <link rel='shortcut icon' type='image/x-icon' href='<?=ROOT; ?>/assets/admin/img/favicon.ico' />
+  <link rel='shortcut icon' type='image/x-icon' href="<?=STATIC_ROOT; ?>/landing/img/favicon.png" />
 </head>
 
 <body>
@@ -62,7 +62,6 @@ $company = query_fetch("SELECT * FROM company LIMIT 1")[0]
     }
   </script>
 </body>
-
 
 <!-- errors-404.html  21 Nov 2019 04:05:02 GMT -->
 </html>

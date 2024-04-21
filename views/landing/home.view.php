@@ -57,7 +57,7 @@
     <div class="carousel-inner" role="listbox">
 
       <!-- Slide 1 -->
-      <div class="carousel-item active" style="background-image: url(<?=ROOT; ?>/assets/landing/img/slide/slide-1.jpg);">
+      <div class="carousel-item active" style="background-image: url(<?=STATIC_ROOT; ?>/landing/img/slide/slide-1.jpg);">
         <div class="carousel-container">
           <div class="carousel-content animate__animated animate__fadeInUp">
             <h2>Welcome to <span class="text-capitalize"><?=$context['company']['name']; ?></span></h2>
@@ -68,7 +68,7 @@
       </div>
 
       <!-- Slide 2 -->
-      <div class="carousel-item" style="background-image: url(<?=ROOT; ?>/assets/landing/img/slide/slide-2.jpg);">
+      <div class="carousel-item" style="background-image: url(<?=STATIC_ROOT; ?>/landing/img/slide/slide-2.jpg);">
         <div class="carousel-container">
           <div class="carousel-content animate__animated animate__fadeInUp">
             <h2>Top-quality parts at competitive prices</h2>
@@ -79,7 +79,7 @@
       </div>
 
       <!-- Slide 3 -->
-      <div class="carousel-item" style="background-image: url(<?=ROOT; ?>/assets/landing/img/slide/slide-3.jpg);">
+      <div class="carousel-item" style="background-image: url(<?=STATIC_ROOT; ?>/landing/img/slide/slide-3.jpg);">
         <div class="carousel-container">
           <div class="carousel-content animate__animated animate__fadeInUp">
             <h2>Incredible repair services</h2>
@@ -133,7 +133,7 @@
       <p>Our experienced sales staff can help you find the perfect new or used car to fit your needs and budget. We have a huge selection of makes and models, so you're sure to drive off our lot satisfied.</p>
     </div>
     <div class="about-img">
-      <img src="<?=ROOT; ?>/assets/landing/img/mechanic.jpg" alt="">
+      <img src="<?=STATIC_ROOT; ?>/landing/img/mechanic.jpg" alt="">
     </div>
   </section><!-- End About Section -->
 
@@ -241,7 +241,7 @@
 
         <div class="col-lg-6" data-aos="fade-up">
           <div class="testimonial-item">
-            <img src="<?=ROOT; ?>/assets/landing/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+            <img src="<?=STATIC_ROOT; ?>/landing/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
             <h3>Saul Goodman</h3>
             <h4>Ceo &amp; Founder</h4>
             <p>
@@ -254,7 +254,7 @@
 
         <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
           <div class="testimonial-item mt-4 mt-lg-0">
-            <img src="<?=ROOT; ?>/assets/landing/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+            <img src="<?=STATIC_ROOT; ?>/landing/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
             <h3>Sara Wilsson</h3>
             <h4>Designer</h4>
             <p>
@@ -267,7 +267,7 @@
 
         <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
           <div class="testimonial-item mt-4">
-            <img src="<?=ROOT; ?>/assets/landing/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+            <img src="<?=STATIC_ROOT; ?>/landing/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
             <h3>Jena Karlis</h3>
             <h4>Store Owner</h4>
             <p>
@@ -280,7 +280,7 @@
 
         <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
           <div class="testimonial-item mt-4">
-            <img src="<?=ROOT; ?>/assets/landing/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+            <img src="<?=STATIC_ROOT; ?>/landing/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
             <h3>Matt Brandon</h3>
             <h4>Freelancer</h4>
             <p>
